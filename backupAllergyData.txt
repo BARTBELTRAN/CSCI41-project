@@ -1,0 +1,32 @@
+*United States;	320
+Milk		4.7
+Peanut		4.5
+Treenut	        3
+fish		2.2
+Egg		2
+Wheat		2
+Soy		1.5
+Sesame		0.5
+shellfish	8.2
+
+*EUROPE;	447.7
+Milk		25.5189
+Peanut		11.1925
+Treenut		16.1172
+fish		1.7908
+egg		5.8201
+Wheat		9.8494
+soy		5.8201
+Sesame		4.9423
+shellfish	0.4477
+
+*Canada;	36.11
+Milk		397.210
+Peanut		433.320
+Treenut		505.540
+Fish		216.660
+Egg		288.880
+Wheat		144.440
+Soy		108.330
+Sesame		72.220
+Shellfish	397.210

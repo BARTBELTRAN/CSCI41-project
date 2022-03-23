@@ -1,0 +1,2 @@
+*Birch	America		49000 1920000
+*oak	canada		41000 7700000

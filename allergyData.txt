@@ -1,0 +1,33 @@
+*United States;		320000000
+Milk                4700000
+Peanut              4500000
+Treenut             3000000
+Fish                2200000
+Egg                 2000000
+Wheat               2000000
+Soy                 1500000
+Seasame             1500000
+Shellfish           820000
+
+*United Kingdom;	447700000
+Milk                25518900
+Peanut              11192500
+Treenut             16117200
+Fish                1790800
+Egg                 5820100
+Wheat               9849400
+Soy                 5820100
+Seasame             5820100
+Shellfish           447700
+
+*Canada;		36110000
+Milk                397210
+Peanut              433320
+Treenut             505540
+Fish                216660
+Egg                 288880
+Wheat               144440
+Soy                 108330
+Seasame             108330
+Shellfish           397210
+
