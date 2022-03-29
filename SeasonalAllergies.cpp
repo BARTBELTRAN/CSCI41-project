@@ -30,19 +30,6 @@ void PollenArray::readPollen() {
 
 }
 
-void PollenArray::pollenPercent(){
-
-	ofstream fileOut;
-	
-	for (int i = 0; i < pollenSize; ++i){
-		ptrPollen[i].pollenPercentage =	(ptrPollen[i].numOfCases 
-			/ ptrPollen[i].totalPollenCases) * 100;
-		cout << fixed << setprecision(2) << "The percentage of " << 
-			ptrPollen[i].pollenName << " is " << 
-			ptrPollen[i].pollenPercentage << "%\n" << endl;
-	}
-	
-}
 
 int PollenArray::countPollen()
 {
@@ -141,7 +128,6 @@ void PollenArray::printPollen() {
 		cout << "Total number of " << ptrPollen[i].pollenName <<
 			" pollen cases is " << ptrPollen[i].numOfCases << endl <<endl;
 	}
-	pollenPercent();
 }
 //*********************************************************************************
 //This function outputs to an external file the total number of pollen cases for a 
@@ -158,4 +144,115 @@ void PollenArray::fileOutput() {
 	}
 }
 
+void PollenArray::mergeAscending(int const left, int const mid, int const right)
+{
+int const subArrayOne = mid - left + 1;
+	int const subArrayTwo = right - mid;
+	
 
+	Pollen* leftArray = new Pollen[subArrayOne];
+	Pollen* rightArray = new Pollen[subArrayTwo];
+
+	for (int i = 0; i < subArrayOne; i++)
+		leftArray[i] = ptrPollen[left + i];
+	for (int j = 0; j < subArrayTwo; j++)
+		rightArray[j] = ptrPollen[mid + 1 + j];
+
+	int indexOfSubArrayOne = 0, 
+		indexOfSubArrayTwo = 0; 
+	int indexOfMergedArray = left; 
+
+	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
+		if (leftArray[indexOfSubArrayOne].calcPercent()<= rightArray[indexOfSubArrayTwo].calcPercent()) {
+			ptrPollen[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+			indexOfSubArrayOne++;
+		}
+		else {
+			ptrPollen[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+			indexOfSubArrayTwo++;
+		}
+		indexOfMergedArray++;
+	}
+
+	while (indexOfSubArrayOne < subArrayOne) {
+		ptrPollen[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+		indexOfSubArrayOne++;
+		indexOfMergedArray++;
+	}
+
+	while (indexOfSubArrayTwo < subArrayTwo) {
+		ptrPollen[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+		indexOfSubArrayTwo++;
+		indexOfMergedArray++;
+	}
+}
+
+void PollenArray::mergeSortAscending(int const begin, int const end)
+{
+	if (begin >= end)
+		return; 
+
+	int mid = begin + (end - begin) / 2;
+	mergeSortAscending(begin, mid);
+	mergeSortAscending(mid + 1, end);
+	mergeAscending(begin, mid, end);
+}
+
+void PollenArray::mergeDescending(int const left, int const mid, int const right)
+{
+	int const subArrayOne = mid - left + 1;
+	int const subArrayTwo = right - mid;
+
+
+	Pollen* leftArray = new Pollen[subArrayOne];
+	Pollen* rightArray = new Pollen[subArrayTwo];
+
+	for (int i = 0; i < subArrayOne; i++)
+		leftArray[i] = ptrPollen[left + i];
+	for (int j = 0; j < subArrayTwo; j++)
+		rightArray[j] = ptrPollen[mid + 1 + j];
+
+	int indexOfSubArrayOne = 0,
+		indexOfSubArrayTwo = 0;
+	int indexOfMergedArray = left;
+
+	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo)
+	{
+		if (leftArray[indexOfSubArrayOne].calcPercent() > rightArray[indexOfSubArrayTwo].calcPercent())
+		{
+			ptrPollen[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+			indexOfSubArrayOne++;
+		}
+		else {
+			ptrPollen[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+			indexOfSubArrayTwo++;
+		}
+		indexOfMergedArray++;
+	}
+
+	while (indexOfSubArrayOne < subArrayOne) {
+		ptrPollen[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+		indexOfSubArrayOne++;
+		indexOfMergedArray++;
+	}
+
+	while (indexOfSubArrayTwo < subArrayTwo) {
+		ptrPollen[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+		indexOfSubArrayTwo++;
+		indexOfMergedArray++;
+	}
+
+
+}
+
+void PollenArray::mergeSortDescending(int const begin, int const end)
+{
+	if (begin >= end)
+		return;
+
+	int mid = begin + (end - begin) / 2;
+	mergeSortDescending(begin, mid);
+	mergeSortDescending(mid + 1, end);
+	mergeDescending(begin, mid, end);
+
+}

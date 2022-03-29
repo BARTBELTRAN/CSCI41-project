@@ -10,7 +10,7 @@ using namespace std;
 // mainly used to obtain a value for a dynamic array
 // of multiple countries and 
 //
-class DynamicArray
+class CountryArray
 {
 private:
 	int countrySize = 0;			//Holds the size of counties in the list
@@ -21,7 +21,7 @@ private:
 
 
 public:
-	DynamicArray();						//initiates number of countries and updates user list
+	CountryArray();						//initiates number of countries and updates user list
 
 	void readFile();					//reads data from file
 
@@ -37,16 +37,17 @@ public:
 
 	int searchArray(string);            //Searches the array for a specific element
 
+	
 	void mergeAscending(int const, int const, int const);
 
 	void mergeSortAscending(int const,int const);
 
-	void mergeDescending(int const, int const, int const);
+	//void mergeDescending(int const, int const, int const);
 
-	void mergeSortDescending(int const, int const);
-
+	//void mergeSortDescending(int const, int const);
+	
 	int binarySearch(int, int, string);
-
+	
 	void printCountryNames();
 
 	int sizeOfCountry();

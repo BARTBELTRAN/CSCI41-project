@@ -15,19 +15,43 @@ struct Pollen
 	int totalCases;				//Total number of types of pollen
 	double pollenPercentage;
 	double totalPollenCases;
+	double calcPercent() {
+		pollenPercentage = (numOfCases
+			/ totalPollenCases) * 100;
+		return pollenPercentage;
+	}
 };
 
 class PollenArray
 {
 public:
 	void readPollen();
-	void pollenPercent();
+
 	int countPollen();
+
 	void AddPollen(Pollen pollenName);
+
 	void deletePollen(string erase);
+
 	int searchPollen(string search);
+
 	void printPollen();
+
 	void fileOutput();
+
+	void mergeAscending(int const, int const, int const);
+
+	void mergeSortAscending(int const,int const);
+
+	void mergeDescending(int const, int const, int const);
+
+	void mergeSortDescending(int const, int const);
+
+	int getPollenSize()
+	{
+		return pollenSize;
+	}
+
 	PollenArray() {
 		pollenSize = countPollen();
 		ptrPollen = new Pollen[pollenSize];

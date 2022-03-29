@@ -7,6 +7,7 @@
 #include <string>
 #include "CountryManip.h"
 #include "SeasonalAllergy.h"
+#include <windows.h>
 
 
 using namespace std;
@@ -24,12 +25,9 @@ void menuCountry()
 	int enter;
 	Country newCountry;
 	Country delCountry;
-	DynamicArray allergyData;
+	CountryArray allergyData;
 	string countryName;
 	string eraseCountry;
-	int orderChoice;
-	string searchCountry;
-
 	cout << "This program allows for the user to store and access various allergy data for ";
 	cout << "various countries. \n \n";
 
@@ -38,6 +36,7 @@ void menuCountry()
 		cout << "Press 1 to add country" << endl;
 		cout << "Press 2 to remove country" << endl;
 		cout << "Press 3 to view data" << endl;
+		cout << "Press 4 to sort data" << endl;
 		cout << "Press 0 to exit" << endl;
 		cin >> enter;
 	
@@ -81,27 +80,8 @@ void menuCountry()
 				allergyData.Print();
 				allergyData.fileOutput();
 				break;
-			case 4:
-				cout << "Would you like the list to be sorted in ascending or"
-					<< " desending order" << endl;
-				cout << "Press 1 for ascending order" << endl;
-				cout << "Press 2 for desending order" << endl;
-				cin >> orderChoice;
-
-				if (orderChoice == 1) {
-					allergyData.mergeSortAscending(0, allergyData.sizeOfCountry());
-					allergyData.printCountryNames();
-				}
-				else if (orderChoice == 2) {
-					allergyData.mergeSortDescending(0, allergyData.sizeOfCountry());
-					allergyData.printCountryNames();
-				}
-				break;
-			case 5:
-				cout << "What country data would you like to search for: " << endl;
-				cin >> searchCountry;
-				allergyData.binarySearch(0, allergyData.sizeOfCountry() - 1, searchCountry);
-				break;
+			
+			
 			case 0:
 				return;
 			default:
@@ -109,10 +89,10 @@ void menuCountry()
 				cin >> enter;
 				break;
 			}
-			cout << "Would you like to continue? Press Y for yes or N for no: " << endl;
-			cin >> exit;
+			//cout << "Would you like to continue? Press Y for yes or N for no: " << endl;
+			//cin >> exit;
 		
-	} while (exit != 'N' && exit != 'n');
+	} while (enter != 0);
 }
 
 //******************************************************************
@@ -162,6 +142,10 @@ void pollenMenu()
 	string erasePollen;
 	int enter;
 	PollenArray pollen;
+	int orderChoice;
+	string searchPollen;
+	int before = 0;
+	int after = 0;
 
 	do
 	{
@@ -206,13 +190,39 @@ void pollenMenu()
 			cout << "What is the name of the pollen type you want to remove?: ";
 			getline(cin, erasePollen);
 
-			//pollen.deletePollen(erasePollen);
-			//pollen.fileOutput();
+			pollen.deletePollen(erasePollen);
+			pollen.fileOutput();
 			break;
 		case 3:
-			//pollen.printPollen();
+			pollen.printPollen();
+			break;
+		case 4:
+			cout << "Would you like the list to be sorted in ascending or"
+				<< " desending order" << endl;
+			cout << "Press 1 for ascending order" << endl;
+			cout << "Press 2 for desending order" << endl;
+			cin >> orderChoice;
+
+			if (orderChoice == 1) {
+				before = GetTickCount();
+				pollen.mergeSortAscending(0, pollen.getPollenSize());
+				after = GetTickCount();
+				cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
+				pollen.printPollen();
+				pollen.fileOutput();
+			}
+			else if (orderChoice == 2) {
+				before = GetTickCount();
+				pollen.mergeSortDescending(0, pollen.getPollenSize());
+				after = GetTickCount();
+				cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
+				pollen.printPollen();
+				pollen.fileOutput();
+			}
+
 			break;
 		case 0:
+			
 			return;
 		default:
 			cout << "Please only enter 1, 2, or 3: ";
@@ -222,3 +232,4 @@ void pollenMenu()
 
 	} while (enter != 0);
 }
+

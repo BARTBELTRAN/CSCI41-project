@@ -4,10 +4,7 @@
 // Justin Soun, Bart Beltran
 
 #include <iostream>
-//#include "Country.h"
 #include "Menu.h"
-//#include "CountryManip.h"
-//#include "SeasonalAllergy.h"
 using namespace std;
 
 
@@ -15,30 +12,32 @@ using namespace std;
 int main()
 {	
 	int opMenu = 0;
-
-	cout << "Enter 1 for the country menu" << endl <<
-		"Enter 2 for the Pollen menu" << endl <<
-		"Press 9 to exit" << endl;
-	cin >> opMenu;
-
+	
+	int after = 0;
 	while (opMenu != 9)
 	{
+		cout << "Enter 1 for the country menu" << endl <<
+			"Enter 2 for the Pollen menu" << endl <<
+			"Press 9 to exit" << endl;
+		cin >> opMenu;
+		
 		switch (opMenu)
 		{
 		case 1:
 			menuCountry();				//Call to allergy menu function
 			break;
 		case 2:
-			pollenMenu();				///Call to pollen menu funtion
+			pollenMenu();	///Call to pollen menu funtion
+			break;
 		default:
 			break;
 		}
+
 	}
-
-	
-
 	return 0;
 
 }
+
+
 
 

@@ -9,14 +9,14 @@
 // as dynamic array value. Also, calls readFile() to
 // initialize all the values in the country class
 //*****************************************************
-DynamicArray::DynamicArray()
+CountryArray::CountryArray()
 {
 	countrySize = countCountry();
 	Array = new Country[countrySize];
 	readFile();
 }
 
-int DynamicArray::sizeOfCountry()
+int CountryArray::sizeOfCountry()
 {
 	return countrySize;
 }
@@ -26,7 +26,7 @@ int DynamicArray::sizeOfCountry()
 //Function used to read names and data from external file 
 //and store set the values into the country class variables
 //*********************************************************
-void DynamicArray::readFile()
+void CountryArray::readFile()
 {
 	//string outPut;
 	string hold;			//Used as a place holder
@@ -111,7 +111,7 @@ void DynamicArray::readFile()
 //Counts each instance of "*" in order to use value to
 //initalize dynamic array with a specific value
 //****************************************************
-int DynamicArray::countCountry()
+int CountryArray::countCountry()
 {
 	int num = 0;
 	string line;
@@ -134,7 +134,7 @@ int DynamicArray::countCountry()
 //addCountry function adds a user selected country when 
 // called upon in the menu function
 //*****************************************************
-void DynamicArray::addCountry(Country countryName)
+void CountryArray::addCountry(Country countryName)
 {
 	tempArray = new Country[countrySize];
 
@@ -163,7 +163,7 @@ void DynamicArray::addCountry(Country countryName)
 //deleteCountry function deletes a user selected country when 
 // called upon in the menu function
 //*****************************************************************
-void DynamicArray::deleteCountry(string erase)
+void CountryArray::deleteCountry(string erase)
 {
 	searchArray(erase);
 	
@@ -200,7 +200,7 @@ void DynamicArray::deleteCountry(string erase)
 //print function outputs all of the country and allergy information
 // to the user when called upon in the user menu.
 //*****************************************************************
-void DynamicArray::Print() const
+void CountryArray::Print() const
 {
 	char pressToContinue;
 	for (int i = 0; i < countrySize; ++i)
@@ -228,7 +228,7 @@ void DynamicArray::Print() const
 // information to an external file
 //******************************************************************
 
-void DynamicArray::fileOutput()
+void CountryArray::fileOutput()
 {
 	dataOut.open("allergyData.txt");
 
@@ -254,7 +254,7 @@ void DynamicArray::fileOutput()
 // Array matches the input from the user. If it matches, it will return
 // the position, if not, it will return -1.
 //******************************************************************
-int DynamicArray::searchArray(string search){
+int CountryArray::searchArray(string search){
 	for (int i = 0; i < countrySize; ++i){
 		if (Array[i].getName() == search) {
 			return i;
@@ -265,7 +265,7 @@ int DynamicArray::searchArray(string search){
 }
 
 
-void DynamicArray::mergeAscending(int const left, int const mid, int const right) {
+void CountryArray::mergeAscending(int const left, int const mid, int const right) {
 	int const subArrayOne = mid - left + 1;
 	int const subArrayTwo = right - mid;
 	
@@ -283,7 +283,7 @@ void DynamicArray::mergeAscending(int const left, int const mid, int const right
 	int indexOfMergedArray = left; 
 
 	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
-		if (leftArray[indexOfSubArrayOne].getPop() <= rightArray[indexOfSubArrayTwo].getPop()) {
+		if (leftArray[indexOfSubArrayOne].getName()<= rightArray[indexOfSubArrayTwo].getName()) {
 			Array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
 			indexOfSubArrayOne++;
 		}
@@ -308,7 +308,7 @@ void DynamicArray::mergeAscending(int const left, int const mid, int const right
 
 }
 
-void DynamicArray::mergeSortAscending(int const begin, int const end) {
+void CountryArray::mergeSortAscending(int const begin, int const end) {
 	if (begin >= end)
 		return; 
 
@@ -317,10 +317,9 @@ void DynamicArray::mergeSortAscending(int const begin, int const end) {
 	mergeSortAscending(mid + 1, end);
 	mergeAscending(begin, mid, end);
 
-	//cout << GetTickCount() << endl;
 }
-
-void DynamicArray::mergeDescending(int const left, int const mid, int const right) {
+/*
+void CountryArray::mergeDescending(int const left, int const mid, int const right) {
 	int const subArrayOne = mid - left + 1;
 	int const subArrayTwo = right - mid;
 
@@ -337,26 +336,28 @@ void DynamicArray::mergeDescending(int const left, int const mid, int const righ
 		indexOfSubArrayTwo = 0; 
 	int indexOfMergedArray = left; 
 
-	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
-		if (leftArray[indexOfSubArrayOne].getPop() > rightArray[indexOfSubArrayTwo].getPop()) {
-			Array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) 
+	{
+		if (leftArray[indexOfSubArrayOne].getName() > rightArray[indexOfSubArrayTwo].getName()) 
+		{
+			Array[indexOfMergedArray].getName() = leftArray[indexOfSubArrayOne].getName();
 			indexOfSubArrayOne++;
 		}
 		else {
-			Array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+			Array[indexOfMergedArray].getName() = rightArray[indexOfSubArrayTwo].getName();
 			indexOfSubArrayTwo++;
 		}
 		indexOfMergedArray++;
 	}
 
 	while (indexOfSubArrayOne < subArrayOne) {
-		Array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+		Array[indexOfMergedArray].getName() = leftArray[indexOfSubArrayOne].getName();
 		indexOfSubArrayOne++;
 		indexOfMergedArray++;
 	}
 
 	while (indexOfSubArrayTwo < subArrayTwo) {
-		Array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+		Array[indexOfMergedArray].getName() = rightArray[indexOfSubArrayTwo].getName();
 		indexOfSubArrayTwo++;
 		indexOfMergedArray++;
 	}
@@ -364,7 +365,7 @@ void DynamicArray::mergeDescending(int const left, int const mid, int const righ
 
 }
 
-void DynamicArray::mergeSortDescending(int const begin, int const end) {
+void CountryArray::mergeSortDescending(int const begin, int const end) {
 	if (begin >= end)
 		return; 
 
@@ -372,11 +373,9 @@ void DynamicArray::mergeSortDescending(int const begin, int const end) {
 	mergeSortDescending(begin, mid);
 	mergeSortDescending(mid + 1, end);
 	mergeDescending(begin, mid, end);
-
-	//cout << GetTickCount() << endl;
 }
-
-int DynamicArray::binarySearch(int a, int b, string name) {
+*/
+int CountryArray::binarySearch(int a, int b, string name) {
 	mergeSortAscending(0, countrySize);
 
 	if (a <= b) {
@@ -391,7 +390,7 @@ int DynamicArray::binarySearch(int a, int b, string name) {
 	return -1;
 }
 
-void DynamicArray::printCountryNames() {
+void CountryArray::printCountryNames() {
 	for (int i = 0; i < countrySize; i++) {
 		cout << Array[i].getName() << endl;
 	}
