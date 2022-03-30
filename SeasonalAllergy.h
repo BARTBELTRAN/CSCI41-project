@@ -16,9 +16,8 @@ struct Pollen
 	double pollenPercentage;
 	double totalPollenCases;
 	double calcPercent() {
-		pollenPercentage = (numOfCases
+		return (numOfCases
 			/ totalPollenCases) * 100;
-		return pollenPercentage;
 	}
 };
 

@@ -127,6 +127,7 @@ void PollenArray::printPollen() {
 	for (int i = 0; i < pollenSize; i++) {
 		cout << "Total number of " << ptrPollen[i].pollenName <<
 			" pollen cases is " << ptrPollen[i].numOfCases << endl <<endl;
+		cout << ptrPollen[i].calcPercent() << endl;
 	}
 }
 //*********************************************************************************
@@ -218,7 +219,7 @@ void PollenArray::mergeDescending(int const left, int const mid, int const right
 
 	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo)
 	{
-		if (leftArray[indexOfSubArrayOne].calcPercent() > rightArray[indexOfSubArrayTwo].calcPercent())
+		if (leftArray[indexOfSubArrayOne].calcPercent() >= rightArray[indexOfSubArrayTwo].calcPercent())
 		{
 			ptrPollen[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
 			indexOfSubArrayOne++;

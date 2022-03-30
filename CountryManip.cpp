@@ -318,7 +318,7 @@ void CountryArray::mergeSortAscending(int const begin, int const end) {
 	mergeAscending(begin, mid, end);
 
 }
-/*
+
 void CountryArray::mergeDescending(int const left, int const mid, int const right) {
 	int const subArrayOne = mid - left + 1;
 	int const subArrayTwo = right - mid;
@@ -338,26 +338,26 @@ void CountryArray::mergeDescending(int const left, int const mid, int const righ
 
 	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) 
 	{
-		if (leftArray[indexOfSubArrayOne].getName() > rightArray[indexOfSubArrayTwo].getName()) 
+		if (leftArray[indexOfSubArrayOne].getName() <= rightArray[indexOfSubArrayTwo].getName()) 
 		{
-			Array[indexOfMergedArray].getName() = leftArray[indexOfSubArrayOne].getName();
+			Array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
 			indexOfSubArrayOne++;
 		}
 		else {
-			Array[indexOfMergedArray].getName() = rightArray[indexOfSubArrayTwo].getName();
+			Array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
 			indexOfSubArrayTwo++;
 		}
 		indexOfMergedArray++;
 	}
 
 	while (indexOfSubArrayOne < subArrayOne) {
-		Array[indexOfMergedArray].getName() = leftArray[indexOfSubArrayOne].getName();
+		Array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
 		indexOfSubArrayOne++;
 		indexOfMergedArray++;
 	}
 
 	while (indexOfSubArrayTwo < subArrayTwo) {
-		Array[indexOfMergedArray].getName() = rightArray[indexOfSubArrayTwo].getName();
+		Array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
 		indexOfSubArrayTwo++;
 		indexOfMergedArray++;
 	}
@@ -374,7 +374,7 @@ void CountryArray::mergeSortDescending(int const begin, int const end) {
 	mergeSortDescending(mid + 1, end);
 	mergeDescending(begin, mid, end);
 }
-*/
+
 int CountryArray::binarySearch(int a, int b, string name) {
 	mergeSortAscending(0, countrySize);
 

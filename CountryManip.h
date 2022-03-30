@@ -42,9 +42,9 @@ public:
 
 	void mergeSortAscending(int const,int const);
 
-	//void mergeDescending(int const, int const, int const);
+	void mergeDescending(int const, int const, int const);
 
-	//void mergeSortDescending(int const, int const);
+	void mergeSortDescending(int const, int const);
 	
 	int binarySearch(int, int, string);
 	
