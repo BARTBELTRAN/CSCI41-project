@@ -264,7 +264,10 @@ int CountryArray::searchArray(string search){
 
 }
 
-
+//*****************************************************************
+//This function merges all elements in the array in ascending 
+// order
+//*****************************************************************
 void CountryArray::mergeAscending(int const left, int const mid, int const right) {
 	int const subArrayOne = mid - left + 1;
 	int const subArrayTwo = right - mid;
@@ -308,6 +311,11 @@ void CountryArray::mergeAscending(int const left, int const mid, int const right
 
 }
 
+//*****************************************************************
+//This function splits up elements within the array using recursion
+// then calls the mergeAscending function to put all the elements
+// back into one array in ascending order
+//*****************************************************************
 void CountryArray::mergeSortAscending(int const begin, int const end) {
 	if (begin >= end)
 		return; 
@@ -318,7 +326,11 @@ void CountryArray::mergeSortAscending(int const begin, int const end) {
 	mergeAscending(begin, mid, end);
 
 }
-/*
+//*****************************************************************
+//This function merges all elements in the array in Descending 
+// order
+//*****************************************************************
+
 void CountryArray::mergeDescending(int const left, int const mid, int const right) {
 	int const subArrayOne = mid - left + 1;
 	int const subArrayTwo = right - mid;
@@ -338,26 +350,26 @@ void CountryArray::mergeDescending(int const left, int const mid, int const righ
 
 	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) 
 	{
-		if (leftArray[indexOfSubArrayOne].getName() > rightArray[indexOfSubArrayTwo].getName()) 
+		if (leftArray[indexOfSubArrayOne].getName() <= rightArray[indexOfSubArrayTwo].getName()) 
 		{
-			Array[indexOfMergedArray].getName() = leftArray[indexOfSubArrayOne].getName();
+			Array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
 			indexOfSubArrayOne++;
 		}
 		else {
-			Array[indexOfMergedArray].getName() = rightArray[indexOfSubArrayTwo].getName();
+			Array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
 			indexOfSubArrayTwo++;
 		}
 		indexOfMergedArray++;
 	}
 
 	while (indexOfSubArrayOne < subArrayOne) {
-		Array[indexOfMergedArray].getName() = leftArray[indexOfSubArrayOne].getName();
+		Array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
 		indexOfSubArrayOne++;
 		indexOfMergedArray++;
 	}
 
 	while (indexOfSubArrayTwo < subArrayTwo) {
-		Array[indexOfMergedArray].getName() = rightArray[indexOfSubArrayTwo].getName();
+		Array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
 		indexOfSubArrayTwo++;
 		indexOfMergedArray++;
 	}
@@ -365,6 +377,11 @@ void CountryArray::mergeDescending(int const left, int const mid, int const righ
 
 }
 
+//*****************************************************************
+//This function splits up elements within the array using recursion
+// then calls the mergeAscending function to put all the elements
+// back into one array in ascending order
+//*****************************************************************
 void CountryArray::mergeSortDescending(int const begin, int const end) {
 	if (begin >= end)
 		return; 
@@ -374,7 +391,12 @@ void CountryArray::mergeSortDescending(int const begin, int const end) {
 	mergeSortDescending(mid + 1, end);
 	mergeDescending(begin, mid, end);
 }
-*/
+//*****************************************************************
+//BinarySearch utilizes recursion and splitting up the array multiple
+// times. After this, it will search for a singular element of the 
+// user's choosing then return that location of the value within 
+// the array
+//*****************************************************************
 int CountryArray::binarySearch(int a, int b, string name) {
 	mergeSortAscending(0, countrySize);
 

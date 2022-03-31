@@ -38,15 +38,15 @@ public:
 	int searchArray(string);            //Searches the array for a specific element
 
 	
-	void mergeAscending(int const, int const, int const);
+	void mergeAscending(int const, int const, int const);	//Merges all split up elements in ascending order
 
-	void mergeSortAscending(int const,int const);
+	void mergeSortAscending(int const,int const);	//Splits up all elements in array then calls mergeAscending to bring it all back together
 
-	//void mergeDescending(int const, int const, int const);
+	void mergeDescending(int const, int const, int const);	//Merges all split up elements in descending order
 
-	//void mergeSortDescending(int const, int const);
+	void mergeSortDescending(int const, int const);	//Splits up all elements in array then calls MergeDescending to bring it all back together
 	
-	int binarySearch(int, int, string);
+	int binarySearch(int, int, string);		//Constantly splits the array until it finds the value the user is looking for
 	
 	void printCountryNames();
 
