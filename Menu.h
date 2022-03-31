@@ -28,6 +28,9 @@ void menuCountry()
 	CountryArray allergyData;
 	string countryName;
 	string eraseCountry;
+	int choice;
+	int before = 0;
+	int after = 0;
 	cout << "This program allows for the user to store and access various allergy data for ";
 	cout << "various countries. \n \n";
 
@@ -80,6 +83,29 @@ void menuCountry()
 				allergyData.Print();
 				allergyData.fileOutput();
 				break;
+			case 4:
+				cout << "Would you like the list to be sorted in ascending or"
+					<< " desending order" << endl;
+				cout << "Press 1 for ascending order" << endl;
+				cout << "Press 2 for desending order" << endl;
+				cin >> choice;
+
+				if (choice == 1) {
+					before = GetTickCount();
+					allergyData.mergeSortAscending(0, allergyData.sizeOfCountry() - 1);
+					after = GetTickCount();
+					cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
+					allergyData.printCountryNames();
+					allergyData.fileOutput();
+				}
+				else if (choice == 2) {
+					before = GetTickCount();
+					allergyData.mergeSortDescending(0, allergyData.sizeOfCountry() - 1);
+					after = GetTickCount();
+					cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
+					allergyData.printCountryNames();
+					allergyData.fileOutput();
+				}
 			
 			
 			case 0:
@@ -152,6 +178,7 @@ void pollenMenu()
 		cout << "Press 1 to add pollen type" << endl;
 		cout << "Press 2 to remove pollen type" << endl;
 		cout << "Press 3 to view pollen" << endl;
+		cout << "Press 4 to sort allergy data" << endl;
 		cout << "Press 0 to exit" << endl;
 		cin >> enter;
 
@@ -205,7 +232,7 @@ void pollenMenu()
 
 			if (orderChoice == 1) {
 				before = GetTickCount();
-				pollen.mergeSortAscending(0, pollen.getPollenSize());
+				pollen.mergeSortAscending(0, pollen.getPollenSize() - 1);
 				after = GetTickCount();
 				cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 				pollen.printPollen();
@@ -213,7 +240,7 @@ void pollenMenu()
 			}
 			else if (orderChoice == 2) {
 				before = GetTickCount();
-				pollen.mergeSortDescending(0, pollen.getPollenSize());
+				pollen.mergeSortDescending(0, pollen.getPollenSize() - 1);
 				after = GetTickCount();
 				cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 				pollen.printPollen();
