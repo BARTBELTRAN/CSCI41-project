@@ -144,7 +144,10 @@ void PollenArray::fileOutput() {
 		
 	}
 }
-
+//*****************************************************************
+//This function merges all elements in the array in ascending 
+// order
+//*****************************************************************
 void PollenArray::mergeAscending(int const left, int const mid, int const right)
 {
 int const subArrayOne = mid - left + 1;
@@ -188,6 +191,10 @@ int const subArrayOne = mid - left + 1;
 	}
 }
 
+//*****************************************************************
+//This function splits the array then calls mergeAscending in order
+// to put it back together in ascending order
+//*****************************************************************
 void PollenArray::mergeSortAscending(int const begin, int const end)
 {
 	if (begin >= end)
@@ -199,6 +206,10 @@ void PollenArray::mergeSortAscending(int const begin, int const end)
 	mergeAscending(begin, mid, end);
 }
 
+//*****************************************************************
+//This function merges all elements in the array in Descending 
+// order
+//*****************************************************************
 void PollenArray::mergeDescending(int const left, int const mid, int const right)
 {
 	int const subArrayOne = mid - left + 1;
@@ -245,7 +256,10 @@ void PollenArray::mergeDescending(int const left, int const mid, int const right
 
 
 }
-
+//*****************************************************************
+//This function splits the array then calls mergeDescending in order
+// to put it back together in Descending order
+//*****************************************************************
 void PollenArray::mergeSortDescending(int const begin, int const end)
 {
 	if (begin >= end)
