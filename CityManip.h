@@ -1,4 +1,6 @@
 #pragma once
+#include<iostream>
+#include<fstream>
 #include "City.h"
 using namespace std;
 
@@ -15,9 +17,12 @@ private:
 	cityNode* cityListHead = nullptr;
 	cityNode* cityListTail = nullptr;
 	int cityLenght = 0;
+	ofstream dataOut;
 
 public:
 	void addCity(City);
 	void removeCity(string);
-	void printCities();				//Prints all cities
+	void printCities();
+	void cityFilesOutput();
+	void searchCity(string);
 };
