@@ -1,6 +1,7 @@
 //Bart Beltran Justin Soun
 #pragma once
 #include "SeasonalAllergy.h"
+#include "windows.h"
 
 void PollenArray::readPollen() {
 	ifstream fileIn;
@@ -190,6 +191,7 @@ int const subArrayOne = mid - left + 1;
 
 void PollenArray::mergeSortAscending(int const begin, int const end)
 {
+	int before = GetTickCount();
 	if (begin >= end)
 		return; 
 
@@ -197,6 +199,8 @@ void PollenArray::mergeSortAscending(int const begin, int const end)
 	mergeSortAscending(begin, mid);
 	mergeSortAscending(mid + 1, end);
 	mergeAscending(begin, mid, end);
+	int after = GetTickCount();
+	cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 }
 
 void PollenArray::mergeDescending(int const left, int const mid, int const right)
@@ -248,6 +252,7 @@ void PollenArray::mergeDescending(int const left, int const mid, int const right
 
 void PollenArray::mergeSortDescending(int const begin, int const end)
 {
+	int before = GetTickCount();
 	if (begin >= end)
 		return;
 
@@ -255,5 +260,6 @@ void PollenArray::mergeSortDescending(int const begin, int const end)
 	mergeSortDescending(begin, mid);
 	mergeSortDescending(mid + 1, end);
 	mergeDescending(begin, mid, end);
-
+	int after = GetTickCount();
+	cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 }

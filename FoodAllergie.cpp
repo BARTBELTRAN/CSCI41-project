@@ -18,6 +18,7 @@ int main()
 	{
 		cout << "Enter 1 for the country menu" << endl <<
 			"Enter 2 for the Pollen menu" << endl <<
+			"Enter 3 for the City menu" << endl <<
 			"Press 9 to exit" << endl;
 		cin >> opMenu;
 		
@@ -27,7 +28,10 @@ int main()
 			menuCountry();				//Call to allergy menu function
 			break;
 		case 2:
-			pollenMenu();	///Call to pollen menu funtion
+			pollenMenu();				//Call to pollen menu funtion
+			break;
+		case 3:
+			cityMenu();					//Call to city menu function
 			break;
 		default:
 			break;

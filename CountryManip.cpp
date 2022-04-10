@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "CountryManip.h"
 #include "Country.h"
+#include "windows.h"
 
 //*****************************************************
 // DynamicArray constructor that call the countCountry
@@ -266,6 +267,7 @@ int CountryArray::searchArray(string search){
 
 
 void CountryArray::mergeAscending(int const left, int const mid, int const right) {
+	
 	int const subArrayOne = mid - left + 1;
 	int const subArrayTwo = right - mid;
 	
@@ -309,6 +311,7 @@ void CountryArray::mergeAscending(int const left, int const mid, int const right
 }
 
 void CountryArray::mergeSortAscending(int const begin, int const end) {
+	int before = GetTickCount();
 	if (begin >= end)
 		return; 
 
@@ -316,7 +319,8 @@ void CountryArray::mergeSortAscending(int const begin, int const end) {
 	mergeSortAscending(begin, mid);
 	mergeSortAscending(mid + 1, end);
 	mergeAscending(begin, mid, end);
-
+	int after = GetTickCount();
+	cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 }
 
 void CountryArray::mergeDescending(int const left, int const mid, int const right) {
@@ -366,6 +370,7 @@ void CountryArray::mergeDescending(int const left, int const mid, int const righ
 }
 
 void CountryArray::mergeSortDescending(int const begin, int const end) {
+	int before = GetTickCount();
 	if (begin >= end)
 		return; 
 
@@ -373,11 +378,13 @@ void CountryArray::mergeSortDescending(int const begin, int const end) {
 	mergeSortDescending(begin, mid);
 	mergeSortDescending(mid + 1, end);
 	mergeDescending(begin, mid, end);
+	int after = GetTickCount();
+	cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 }
 
 int CountryArray::binarySearch(int a, int b, string name) {
 	mergeSortAscending(0, countrySize);
-
+	int before = GetTickCount();
 	if (a <= b) {
 		int mid = (a + b) / 2;
 		if (Array[mid].getName() == name)
@@ -387,6 +394,8 @@ int CountryArray::binarySearch(int a, int b, string name) {
 		if (Array[mid].getName() < name)
 			return binarySearch(a, mid - 1, name);
 	}
+	int after = GetTickCount();
+	cout << "Binary search took " << after - before << " milliseconds to execute." << endl;
 	return -1;
 }
 

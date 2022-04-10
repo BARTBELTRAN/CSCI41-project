@@ -1,8 +1,10 @@
 #pragma once
 #include "CityManip.h"
+#include <windows.h>
 
 void CityManip::addCity(City cityIn)
 {
+	int begin = GetTickCount();
 	cityNode* tempNode = new cityNode;
 	tempNode->cityData = cityIn;
 
@@ -16,10 +18,13 @@ void CityManip::addCity(City cityIn)
 		cityListTail->nextCity = tempNode;
 		cityListTail = tempNode;
 	}
+	int after = GetTickCount();
+	cout << after - begin << " milliseconds have elapsed" << endl;
 }
 
 void CityManip::removeCity(string cityOut)
 {
+	int begin = GetTickCount();
 	cityNode* tempNode = cityListHead;
 	cityNode* deleteNode = nullptr;
 
@@ -48,6 +53,8 @@ void CityManip::removeCity(string cityOut)
 	}
 
 	delete deleteNode;
+	int after = GetTickCount();
+	cout << after - begin << " milliseconds have elapsed." << endl;
 }
 
 void CityManip::printCities()
@@ -84,6 +91,7 @@ void CityManip::cityFilesOutput()
 
 void CityManip::searchCity(string search)
 {
+	int before = GetTickCount();
 	cityNode* tempNode = cityListHead;
 	cityNode* deleteNode = nullptr;
 	bool found = false;
@@ -105,6 +113,8 @@ void CityManip::searchCity(string search)
 	{
 		cout << "Data was not found!\n";
 	}
+	int after = GetTickCount();
+	cout << after - before << " milliseconds have elapsed" << endl;
 }
 
 //add time complexity function
