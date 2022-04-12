@@ -30,7 +30,23 @@ void PollenArray::readPollen() {
 	}
 
 }
+//*********************************************************************************
+//This function calculates the percentage of a certain pollen compared to the entire 
+//pollen cases in a certain geographical area
+//*********************************************************************************
+void PollenArray::pollenPercent() {
+	ofstream fileOut;
+	double total;
 
+	for (int i = 0; i < pollenSize; ++i) {
+		ptrPollen[i].pollenPercentage = (ptrPollen[i].numOfCases
+			/ ptrPollen[i].totalPollenCases) * 100;
+		cout << fixed << setprecision(2) << "The percentage of " <<
+			ptrPollen[i].pollenName << " is " <<
+			ptrPollen[i].pollenPercentage << "%\n" << endl;
+	}
+
+}
 
 int PollenArray::countPollen()
 {

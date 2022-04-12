@@ -46,6 +46,8 @@ public:
 
 	void mergeSortDescending(int const, int const);
 
+	void pollenPercent();
+
 	int getPollenSize()
 	{
 		return pollenSize;

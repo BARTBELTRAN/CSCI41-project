@@ -20,6 +20,7 @@ private:
 	ofstream dataOut;
 
 public:
+	void fileInput();
 	void addCity(City);
 	void removeCity(string);
 	void printCities();

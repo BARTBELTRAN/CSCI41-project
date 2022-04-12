@@ -8,7 +8,7 @@
 #include "CountryManip.h"
 #include "SeasonalAllergy.h"
 #include <windows.h>
-
+#include "CityManip.h"
 
 using namespace std;
 
@@ -91,18 +91,12 @@ void menuCountry()
 				cin >> choice;
 
 				if (choice == 1) {
-					before = GetTickCount();
 					allergyData.mergeSortAscending(0, allergyData.sizeOfCountry() - 1);
-					after = GetTickCount();
-					cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 					allergyData.printCountryNames();
 					allergyData.fileOutput();
 				}
 				else if (choice == 2) {
-					before = GetTickCount();
 					allergyData.mergeSortDescending(0, allergyData.sizeOfCountry() - 1);
-					after = GetTickCount();
-					cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 					allergyData.printCountryNames();
 					allergyData.fileOutput();
 				}
@@ -111,7 +105,7 @@ void menuCountry()
 			case 0:
 				return;
 			default:
-				cout << "Please only enter 1, 2, or 3: ";
+				cout << "Please only enter 1, 2, 3, or 4: ";
 				cin >> enter;
 				break;
 			}
@@ -170,8 +164,7 @@ void pollenMenu()
 	PollenArray pollen;
 	int orderChoice;
 	string searchPollen;
-	int before = 0;
-	int after = 0;
+
 
 	do
 	{
@@ -231,18 +224,12 @@ void pollenMenu()
 			cin >> orderChoice;
 
 			if (orderChoice == 1) {
-				before = GetTickCount();
 				pollen.mergeSortAscending(0, pollen.getPollenSize() - 1);
-				after = GetTickCount();
-				cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 				pollen.printPollen();
 				pollen.fileOutput();
 			}
 			else if (orderChoice == 2) {
-				before = GetTickCount();
 				pollen.mergeSortDescending(0, pollen.getPollenSize() - 1);
-				after = GetTickCount();
-				cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 				pollen.printPollen();
 				pollen.fileOutput();
 			}
@@ -252,8 +239,67 @@ void pollenMenu()
 			
 			return;
 		default:
-			cout << "Please only enter 1, 2, or 3: ";
+			cout << "Please only enter 1, 2, 3, or 4: ";
 			
+			break;
+		}
+
+	} while (enter != 0);
+}
+
+void cityMenu() {
+	int enter = 0;
+	string cityAdd = "";
+	CityManip city;
+	int deleteChoice;
+	string cityDelete = "";
+	string citySearch = "";
+	City add;
+
+
+	do {
+		cout << "Press 1 to add a city" << endl;
+		cout << "Press 2 to remove a city" << endl;
+		cout << "Press 3 to view city data" << endl;
+		cout << "Press 4 to search for certain city data" << endl;
+		cout << "Press 0 to exit" << endl;
+		cin >> enter;
+
+		switch (enter) {
+		case 1:
+			cout << "Enter the name of the city you would like to add: ";
+			cin >> cityAdd;
+			add.setName(cityAdd);
+			city.addCity(add);
+			city.cityFilesOutput();
+		case 2:
+			cout << "Are you sure you would like to remove a city?" << endl;
+			cout << "Enter 1 to proceed or 0 to exit: ";
+			cin >> deleteChoice;
+
+			if (deleteChoice == 1) {
+				cout << "Enter the name of the city you would like to delete: ";
+				cin >> cityDelete;
+				city.removeCity(cityDelete);
+				city.cityFilesOutput();
+			}
+			else if (deleteChoice == 0) {
+				cout << "Delete function will now be executed. Please restart program." << endl;
+				return;
+			}
+			break;
+		case 3:
+			city.printCities();
+			break;
+		case 4:
+			cout << "Enter the name of the city you would like to search for: ";
+			cin >> citySearch;
+			city.searchCity(citySearch);
+			break;
+		case 0:
+			return;
+		default:
+			cout << "Please enter only 1, 2, 3, or 4: ";
 			break;
 		}
 
