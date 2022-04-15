@@ -18,9 +18,10 @@ private:
 	cityNode* cityListTail = nullptr;
 	int cityLenght = 0;
 	ofstream dataOut;
+	ifstream dataIn;
+	string cityName;
 
 public:
-	void fileInput();
 	void addCity(City);
 	void removeCity(string);
 	void printCities();

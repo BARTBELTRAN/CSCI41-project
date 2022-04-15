@@ -255,7 +255,8 @@ void cityMenu() {
 	string cityDelete = "";
 	string citySearch = "";
 	City add;
-
+	int cityReactions;
+	int cityHospitalizations;
 
 	do {
 		cout << "Press 1 to add a city" << endl;
@@ -267,9 +268,12 @@ void cityMenu() {
 
 		switch (enter) {
 		case 1:
-			cout << "Enter the name of the city you would like to add: ";
+			cout << "Enter the name of the city you would like to add \n";
+			cout << "Followed by the number of total allergic reactions in given city \n";
+			cout << "And the total number of hospitalizations \n";
+			cout << "Ex: (Reedley xxxxx xxxxx): \n";
 			cin >> cityAdd;
-			add.setName(cityAdd);
+			
 			city.addCity(add);
 			city.cityFilesOutput();
 		case 2:
@@ -289,7 +293,8 @@ void cityMenu() {
 			}
 			break;
 		case 3:
-			city.printCities();
+			//city.printCities();
+			city.cityFilesOutput();
 			break;
 		case 4:
 			cout << "Enter the name of the city you would like to search for: ";

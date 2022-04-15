@@ -1,13 +1,28 @@
 #pragma once
 #include "CityManip.h"
 #include <windows.h>
+/*
+void CityManip::fileInput() {
+	//dataIn and dataOut for file input and output
+	ifstream dataIn;
+	dataIn.open("city.txt");
 
+	CityManip* cityPtr = nullptr;
+
+
+	while (!dataIn) {
+		dataIn >> cityName >> cityHospitalizations >> cityAllergicReactions;
+		addCity(cityName);
+
+	}
+}
+*/
 void CityManip::addCity(City cityIn)
 {
-	int begin = GetTickCount();
+	int begin = GetTickCount64();
 	cityNode* tempNode = new cityNode;
 	tempNode->cityData = cityIn;
-
+	
 	if (cityListHead == nullptr)
 	{
 		cityListHead = tempNode;
@@ -18,13 +33,13 @@ void CityManip::addCity(City cityIn)
 		cityListTail->nextCity = tempNode;
 		cityListTail = tempNode;
 	}
-	int after = GetTickCount();
+	int after = GetTickCount64();
 	cout << after - begin << " milliseconds have elapsed" << endl;
 }
 
 void CityManip::removeCity(string cityOut)
 {
-	int begin = GetTickCount();
+	int begin = GetTickCount64();
 	cityNode* tempNode = cityListHead;
 	cityNode* deleteNode = nullptr;
 
@@ -53,7 +68,7 @@ void CityManip::removeCity(string cityOut)
 	}
 
 	delete deleteNode;
-	int after = GetTickCount();
+	int after = GetTickCount64();
 	cout << after - begin << " milliseconds have elapsed." << endl;
 }
 
@@ -80,9 +95,13 @@ void CityManip::cityFilesOutput()
 	while (cityListHead != nullptr)
 	{
 		dataOut << tempNode->cityData.getName() << endl;
-		dataOut << tempNode->cityData.getNumAllergicReactions() << endl;
-		dataOut << tempNode->cityData.getNumHospitalizations() << endl;
+		cout << tempNode->cityData.getName() << endl;
 
+		dataOut << tempNode->cityData.getNumAllergicReactions() << endl;
+		cout << tempNode->cityData.getNumAllergicReactions() << endl;
+
+		dataOut << tempNode->cityData.getNumHospitalizations() << endl;
+cout << tempNode->cityData.getNumHospitalizations() << endl;
 		tempNode = tempNode->nextCity;
 	}
 
@@ -91,7 +110,7 @@ void CityManip::cityFilesOutput()
 
 void CityManip::searchCity(string search)
 {
-	int before = GetTickCount();
+	int before = GetTickCount64();
 	cityNode* tempNode = cityListHead;
 	cityNode* deleteNode = nullptr;
 	bool found = false;
@@ -113,7 +132,7 @@ void CityManip::searchCity(string search)
 	{
 		cout << "Data was not found!\n";
 	}
-	int after = GetTickCount();
+	int after = GetTickCount64();
 	cout << after - before << " milliseconds have elapsed" << endl;
 }
 
