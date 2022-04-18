@@ -1,28 +1,13 @@
 #pragma once
 #include "CityManip.h"
 #include <windows.h>
-/*
-void CityManip::fileInput() {
-	//dataIn and dataOut for file input and output
-	ifstream dataIn;
-	dataIn.open("city.txt");
 
-	CityManip* cityPtr = nullptr;
-
-
-	while (!dataIn) {
-		dataIn >> cityName >> cityHospitalizations >> cityAllergicReactions;
-		addCity(cityName);
-
-	}
-}
-*/
 void CityManip::addCity(City cityIn)
 {
 	int begin = GetTickCount64();
 	cityNode* tempNode = new cityNode;
 	tempNode->cityData = cityIn;
-	
+
 	if (cityListHead == nullptr)
 	{
 		cityListHead = tempNode;
@@ -75,8 +60,8 @@ void CityManip::removeCity(string cityOut)
 void CityManip::printCities()
 {
 	cityNode* tempNode = cityListHead;
-
-	while (cityListHead != nullptr)
+	
+	while (tempNode != nullptr)
 	{
 		cout << tempNode->cityData.getName() << endl;
 		cout << tempNode->cityData.getNumAllergicReactions() << endl;
@@ -84,6 +69,7 @@ void CityManip::printCities()
 
 		tempNode = tempNode->nextCity;
 	}
+
 }
 
 void CityManip::cityFilesOutput()
@@ -92,16 +78,11 @@ void CityManip::cityFilesOutput()
 
 	dataOut.open("city.txt");
 
-	while (cityListHead != nullptr)
+	while (tempNode != nullptr)
 	{
-		dataOut << tempNode->cityData.getName() << endl;
-		cout << tempNode->cityData.getName() << endl;
-
-		dataOut << tempNode->cityData.getNumAllergicReactions() << endl;
-		cout << tempNode->cityData.getNumAllergicReactions() << endl;
-
+		dataOut << tempNode->cityData.getName() << " ";
+		dataOut << tempNode->cityData.getNumAllergicReactions() << " ";
 		dataOut << tempNode->cityData.getNumHospitalizations() << endl;
-cout << tempNode->cityData.getNumHospitalizations() << endl;
 		tempNode = tempNode->nextCity;
 	}
 
@@ -118,7 +99,7 @@ void CityManip::searchCity(string search)
 
 	while (tempNode != nullptr)
 	{
-		if (tempNode->nextCity->cityData.getName() == search)
+		if (tempNode->cityData.getName() == search)
 		{
 			found = true;
 			cout << tempNode->cityData.getName() << endl;
@@ -135,5 +116,29 @@ void CityManip::searchCity(string search)
 	int after = GetTickCount64();
 	cout << after - before << " milliseconds have elapsed" << endl;
 }
+
+void CityManip::readFile()
+{
+	City tempCity;
+	string cityName;
+	int cityReactions;
+	int cityHospitalizations;
+
+	dataIn.open("city.txt");
+
+	while (dataIn >> cityName)
+	{
+		
+		tempCity.setName(cityName);
+		dataIn >> cityReactions;
+		tempCity.setNumAllergicReactions(cityReactions);
+		dataIn >> cityHospitalizations;
+		tempCity.setNumHospitalizations(cityHospitalizations);
+		addCity(tempCity);
+	}
+	dataIn.close();
+}
+
+
 
 //add time complexity function

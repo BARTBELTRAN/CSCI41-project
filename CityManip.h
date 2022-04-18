@@ -16,6 +16,7 @@ class CityManip
 private:
 	cityNode* cityListHead = nullptr;
 	cityNode* cityListTail = nullptr;
+
 	int cityLenght = 0;
 	ofstream dataOut;
 	ifstream dataIn;
@@ -27,4 +28,8 @@ public:
 	void printCities();
 	void cityFilesOutput();
 	void searchCity(string);
+	void readFile();
+	CityManip() {
+		readFile();
+	}
 };

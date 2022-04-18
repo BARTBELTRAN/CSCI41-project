@@ -30,7 +30,7 @@ int main()
 		case 2:
 			pollenMenu();				//Call to pollen menu funtion
 			break;
-		case 3:
+		case 3: 
 			cityMenu();					//Call to city menu function
 			break;
 		default:

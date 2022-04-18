@@ -40,7 +40,7 @@ public:
 
 	void mergeAscending(int const, int const, int const);
 
-	void mergeSortAscending(int const,int const);
+	void mergeSortAscending(int const, int const);
 
 	void mergeDescending(int const, int const, int const);
 
