@@ -1,6 +1,7 @@
 //Bart Beltran Justin Soun
 #pragma once
 #include "SeasonalAllergy.h"
+#include "windows.h"
 
 void PollenArray::readPollen() {
 	ifstream fileIn;
@@ -14,14 +15,14 @@ void PollenArray::readPollen() {
 	for (size_t i = 0; i < pollenSize; i++)
 	{
 		fileIn >> pollenData;
-		
+
 
 		if (pollenData.find('*') != string::npos)
 		{
 			pollenData.erase(pollenData.find('*'), 1);
 			pol1.pollenName = pollenData;
 		}
-		
+
 		fileIn >> pol1.typeOfGeography >> pol1.numOfCases
 			>> pol1.totalPollenCases;
 
@@ -109,13 +110,13 @@ void PollenArray::deletePollen(string erase)
 	pollenSize--;
 }
 
-int PollenArray::searchPollen(string search){
-	for (int i = 0; i < pollenSize; ++i){
+int PollenArray::searchPollen(string search) {
+	for (int i = 0; i < pollenSize; ++i) {
 		if (ptrPollen[i].pollenName == search) {
 			return i;
 		}
 	}
-		return -1;
+	return -1;
 
 }
 
@@ -126,8 +127,9 @@ int PollenArray::searchPollen(string search){
 void PollenArray::printPollen() {
 	for (int i = 0; i < pollenSize; i++) {
 		cout << "Total number of " << ptrPollen[i].pollenName <<
-			" pollen cases is " << ptrPollen[i].numOfCases << endl <<endl;
-		cout << ptrPollen[i].calcPercent() << endl;
+			" pollen cases is " << ptrPollen[i].numOfCases << endl;
+		cout << fixed << setprecision(2) << ptrPollen[i].calcPercent() << "%"
+			" of the allergies in the area are this allergy "<< endl << endl;
 	}
 }
 //*********************************************************************************
@@ -141,18 +143,15 @@ void PollenArray::fileOutput() {
 	for (int i = 0; i < pollenSize; i++) {
 		fileOut << "Total number of " << ptrPollen[i].pollenName <<
 			" pollen cases is " << ptrPollen[i].numOfCases << endl;
-		
+
 	}
 }
-//*****************************************************************
-//This function merges all elements in the array in ascending 
-// order
-//*****************************************************************
+
 void PollenArray::mergeAscending(int const left, int const mid, int const right)
 {
-int const subArrayOne = mid - left + 1;
+	int const subArrayOne = mid - left + 1;
 	int const subArrayTwo = right - mid;
-	
+
 
 	Pollen* leftArray = new Pollen[subArrayOne];
 	Pollen* rightArray = new Pollen[subArrayTwo];
@@ -162,12 +161,12 @@ int const subArrayOne = mid - left + 1;
 	for (int j = 0; j < subArrayTwo; j++)
 		rightArray[j] = ptrPollen[mid + 1 + j];
 
-	int indexOfSubArrayOne = 0, 
-		indexOfSubArrayTwo = 0; 
-	int indexOfMergedArray = left; 
+	int indexOfSubArrayOne = 0,
+		indexOfSubArrayTwo = 0;
+	int indexOfMergedArray = left;
 
 	while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
-		if (leftArray[indexOfSubArrayOne].calcPercent()<= rightArray[indexOfSubArrayTwo].calcPercent()) {
+		if (leftArray[indexOfSubArrayOne].calcPercent() <= rightArray[indexOfSubArrayTwo].calcPercent()) {
 			ptrPollen[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
 			indexOfSubArrayOne++;
 		}
@@ -191,14 +190,11 @@ int const subArrayOne = mid - left + 1;
 	}
 }
 
-//*****************************************************************
-//This function splits the array then calls mergeAscending in order
-// to put it back together in ascending order
-//*****************************************************************
 void PollenArray::mergeSortAscending(int const begin, int const end)
 {
+	
 	if (begin >= end)
-		return; 
+		return;
 
 	int mid = begin + (end - begin) / 2;
 	mergeSortAscending(begin, mid);
@@ -206,10 +202,6 @@ void PollenArray::mergeSortAscending(int const begin, int const end)
 	mergeAscending(begin, mid, end);
 }
 
-//*****************************************************************
-//This function merges all elements in the array in Descending 
-// order
-//*****************************************************************
 void PollenArray::mergeDescending(int const left, int const mid, int const right)
 {
 	int const subArrayOne = mid - left + 1;
@@ -256,10 +248,7 @@ void PollenArray::mergeDescending(int const left, int const mid, int const right
 
 
 }
-//*****************************************************************
-//This function splits the array then calls mergeDescending in order
-// to put it back together in Descending order
-//*****************************************************************
+
 void PollenArray::mergeSortDescending(int const begin, int const end)
 {
 	if (begin >= end)
@@ -269,5 +258,4 @@ void PollenArray::mergeSortDescending(int const begin, int const end)
 	mergeSortDescending(begin, mid);
 	mergeSortDescending(mid + 1, end);
 	mergeDescending(begin, mid, end);
-
 }

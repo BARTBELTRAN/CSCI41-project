@@ -7,8 +7,8 @@
 #include <string>
 #include "CountryManip.h"
 #include "SeasonalAllergy.h"
-#include <windows.h>
-
+#include <chrono>
+#include "CityManip.h"
 
 using namespace std;
 
@@ -42,82 +42,76 @@ void menuCountry()
 		cout << "Press 4 to sort data" << endl;
 		cout << "Press 0 to exit" << endl;
 		cin >> enter;
-	
-			switch (enter)
-			{
-			case 1:
-				cout << "What is the name of the country you would like to add?: ";
-				cin >> countryName;
-				cout << endl;
-				addAllergyData(newCountry);
-				newCountry.setName(countryName);
-				allergyData.addCountry(newCountry);
-				allergyData.fileOutput();
-				break;
-			case 2:
 
-				int check;
-				do {
-					cout << "Would you like to continue deleting a country? Press 0 to exit or 1 to continue: ";
-					cin >> check;
+		switch (enter)
+		{
+		case 1:
+			cout << "What is the name of the country you would like to add?: ";
+			cin >> countryName;
+			cout << endl;
+			addAllergyData(newCountry);
+			newCountry.setName(countryName);
+			allergyData.addCountry(newCountry);
+			allergyData.fileOutput();
+			break;
+		case 2:
 
-					if (check == 0) {
-						cout << "Delete function will now be exited. Please restart program. \n";
-						return;
-					}
+			int check;
+			do {
+				cout << "Would you like to continue deleting a country? Press 0 to exit or 1 to continue: ";
+				cin >> check;
 
-					else if (check == 1) {
-						cout << "You can now proceed to deleting a country. \n";
-					}
-					cin.ignore();
-				} while (check != 0 && check != 1);
-
-
-				cout << "What is the name of the country you want to remove?: ";
-				getline(cin, eraseCountry);
-
-				allergyData.deleteCountry(eraseCountry);
-				allergyData.fileOutput();
-				break;
-			case 3:
-				allergyData.Print();
-				allergyData.fileOutput();
-				break;
-			case 4:
-				cout << "Would you like the list to be sorted in ascending or"
-					<< " desending order" << endl;
-				cout << "Press 1 for ascending order" << endl;
-				cout << "Press 2 for desending order" << endl;
-				cin >> choice;
-
-				if (choice == 1) {
-					before = GetTickCount();
-					allergyData.mergeSortAscending(0, allergyData.sizeOfCountry() - 1);
-					after = GetTickCount();
-					cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
-					allergyData.printCountryNames();
-					allergyData.fileOutput();
+				if (check == 0) {
+					cout << "Delete function will now be exited. Please restart program. \n";
+					return;
 				}
-				else if (choice == 2) {
-					before = GetTickCount();
-					allergyData.mergeSortDescending(0, allergyData.sizeOfCountry() - 1);
-					after = GetTickCount();
-					cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
-					allergyData.printCountryNames();
-					allergyData.fileOutput();
+
+				else if (check == 1) {
+					cout << "You can now proceed to deleting a country. \n";
 				}
-			
-			
-			case 0:
-				return;
-			default:
-				cout << "Please only enter 1, 2, or 3: ";
-				cin >> enter;
-				break;
+				cin.ignore();
+			} while (check != 0 && check != 1);
+
+
+			cout << "What is the name of the country you want to remove?: ";
+			getline(cin, eraseCountry);
+
+			allergyData.deleteCountry(eraseCountry);
+			allergyData.fileOutput();
+			break;
+		case 3:
+			allergyData.Print();
+			allergyData.fileOutput();
+			break;
+		case 4:
+			cout << "Would you like the list to be sorted in ascending or"
+				<< " desending order" << endl;
+			cout << "Press 1 for ascending order" << endl;
+			cout << "Press 2 for desending order" << endl;
+			cin >> choice;
+
+			if (choice == 1) {
+				allergyData.mergeSortAscending(0, allergyData.sizeOfCountry() - 1);
+				allergyData.printCountryNames();
+				allergyData.fileOutput();
 			}
-			//cout << "Would you like to continue? Press Y for yes or N for no: " << endl;
-			//cin >> exit;
-		
+			else if (choice == 2) {
+				allergyData.mergeSortDescending(0, allergyData.sizeOfCountry() - 1);
+				allergyData.printCountryNames();
+				allergyData.fileOutput();
+			}
+
+
+		case 0:
+			return;
+		default:
+			cout << "Please only enter 1, 2, 3, or 4: ";
+			cin >> enter;
+			break;
+		}
+		//cout << "Would you like to continue? Press Y for yes or N for no: " << endl;
+		//cin >> exit;
+
 	} while (enter != 0);
 }
 
@@ -170,8 +164,7 @@ void pollenMenu()
 	PollenArray pollen;
 	int orderChoice;
 	string searchPollen;
-	int before = 0;
-	int after = 0;
+
 
 	do
 	{
@@ -231,32 +224,108 @@ void pollenMenu()
 			cin >> orderChoice;
 
 			if (orderChoice == 1) {
-				before = GetTickCount();
 				pollen.mergeSortAscending(0, pollen.getPollenSize() - 1);
-				after = GetTickCount();
-				cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 				pollen.printPollen();
 				pollen.fileOutput();
 			}
 			else if (orderChoice == 2) {
-				before = GetTickCount();
 				pollen.mergeSortDescending(0, pollen.getPollenSize() - 1);
-				after = GetTickCount();
-				cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 				pollen.printPollen();
 				pollen.fileOutput();
 			}
 
 			break;
 		case 0:
-			
+
 			return;
 		default:
-			cout << "Please only enter 1, 2, or 3: ";
-			
+			cout << "Please only enter 1, 2, 3, or 4: ";
+
 			break;
 		}
 
 	} while (enter != 0);
 }
 
+void cityMenu() {
+	int enter = 0;
+	string cityAdd = "";
+	CityManip city;
+	int deleteChoice;
+	string cityDelete = "";
+	string citySearch = "";
+	City add;
+	double value1;
+	double value2;
+	int cityReactions;
+	int cityHospitalizations;
+	using namespace std::chrono;
+	milliseconds mil(1000);
+	do {
+		cout << "Press 1 to add a city" << endl;
+		cout << "Press 2 to remove a city" << endl;
+		cout << "Press 3 to view city data" << endl;
+		cout << "Press 4 to search for certain city data" << endl;
+		cout << "Press 0 to exit" << endl;
+		cin >> enter;
+
+		switch (enter) {
+		case 1:
+			
+			
+
+			cout << "Enter the name of the city you would like to add \n";
+			cout << "Followed by the number of total allergic reactions in given city \n";
+			cout << "And the total number of hospitalizations \n";
+			cout << "Ex: (Reedley xxxxx xxxxx): \n";
+			cin >> cityAdd;
+			cin >> value1;
+			cin >> value2;
+			add.setName(cityAdd);
+			add.setNumAllergicReactions(value1);
+			add.setNumHospitalizations(value2);
+			city.addCity(add);
+			city.cityFilesOutput();
+
+
+			cout << mil.count() << " milliseconds have elapsed." << endl;
+			break;
+		case 2:
+			
+			cout << "Are you sure you would like to remove a city?" << endl;
+			cout << "Enter 1 to proceed or 0 to exit: ";
+			cin >> deleteChoice;
+
+			if (deleteChoice == 1) {
+				cout << "Enter the name of the city you would like to delete: ";
+				cin >> cityDelete;
+				city.removeCity(cityDelete);
+				city.cityFilesOutput();
+			}
+			else if (deleteChoice == 0) {
+				cout << "Delete function will now be executed. Please restart program." << endl;
+				return;
+			}
+			cout << mil.count() << " milliseconds have elapsed." << endl;
+			break;
+		case 3:
+			city.printCities();
+			cout << mil.count() << " milliseconds have elapsed." << endl;
+			break;
+		case 4:
+			cout << "Enter the name of the city you would like to search for: ";
+			cin >> citySearch;
+			city.searchCity(citySearch);
+			cout << mil.count() << " milliseconds have elapsed." << endl;
+			break;
+		case 0:
+			return;
+		default:
+			cout << "Please enter only 1, 2, 3, or 4: ";
+			break;
+		}
+
+	} while (enter != 0);
+}
+
+//add menu function for city class
