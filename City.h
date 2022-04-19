@@ -23,7 +23,7 @@ public:
 		numHospitalizations = 0;
 	}
 
-	//Function declaration
+	//Function declarations
 
 	void setNumAllergicReactions(int  allergicReactions) { numAllergicReactions = allergicReactions; }
 

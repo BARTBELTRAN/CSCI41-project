@@ -7,7 +7,7 @@
 #include <string>
 #include "CountryManip.h"
 #include "SeasonalAllergy.h"
-#include <windows.h>
+#include <chrono>
 #include "CityManip.h"
 
 using namespace std;
@@ -259,7 +259,8 @@ void cityMenu() {
 	double value2;
 	int cityReactions;
 	int cityHospitalizations;
-
+	using namespace std::chrono;
+	milliseconds mil(1000);
 	do {
 		cout << "Press 1 to add a city" << endl;
 		cout << "Press 2 to remove a city" << endl;
@@ -270,6 +271,9 @@ void cityMenu() {
 
 		switch (enter) {
 		case 1:
+			
+			
+
 			cout << "Enter the name of the city you would like to add \n";
 			cout << "Followed by the number of total allergic reactions in given city \n";
 			cout << "And the total number of hospitalizations \n";
@@ -282,8 +286,12 @@ void cityMenu() {
 			add.setNumHospitalizations(value2);
 			city.addCity(add);
 			city.cityFilesOutput();
+
+
+			cout << mil.count() << " milliseconds have elapsed." << endl;
 			break;
 		case 2:
+			
 			cout << "Are you sure you would like to remove a city?" << endl;
 			cout << "Enter 1 to proceed or 0 to exit: ";
 			cin >> deleteChoice;
@@ -298,15 +306,17 @@ void cityMenu() {
 				cout << "Delete function will now be executed. Please restart program." << endl;
 				return;
 			}
+			cout << mil.count() << " milliseconds have elapsed." << endl;
 			break;
 		case 3:
 			city.printCities();
-			//city.cityFilesOutput();
+			cout << mil.count() << " milliseconds have elapsed." << endl;
 			break;
 		case 4:
 			cout << "Enter the name of the city you would like to search for: ";
 			cin >> citySearch;
 			city.searchCity(citySearch);
+			cout << mil.count() << " milliseconds have elapsed." << endl;
 			break;
 		case 0:
 			return;

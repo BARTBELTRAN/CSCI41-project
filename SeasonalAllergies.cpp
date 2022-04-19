@@ -30,23 +30,7 @@ void PollenArray::readPollen() {
 	}
 
 }
-//*********************************************************************************
-//This function calculates the percentage of a certain pollen compared to the entire 
-//pollen cases in a certain geographical area
-//*********************************************************************************
-void PollenArray::pollenPercent() {
-	ofstream fileOut;
-	double total;
 
-	for (int i = 0; i < pollenSize; ++i) {
-		ptrPollen[i].pollenPercentage = (ptrPollen[i].numOfCases
-			/ ptrPollen[i].totalPollenCases) * 100;
-		cout << fixed << setprecision(2) << "The percentage of " <<
-			ptrPollen[i].pollenName << " is " <<
-			ptrPollen[i].pollenPercentage << "%\n" << endl;
-	}
-
-}
 
 int PollenArray::countPollen()
 {
@@ -143,8 +127,9 @@ int PollenArray::searchPollen(string search) {
 void PollenArray::printPollen() {
 	for (int i = 0; i < pollenSize; i++) {
 		cout << "Total number of " << ptrPollen[i].pollenName <<
-			" pollen cases is " << ptrPollen[i].numOfCases << endl << endl;
-		cout << ptrPollen[i].calcPercent() << endl;
+			" pollen cases is " << ptrPollen[i].numOfCases << endl;
+		cout << fixed << setprecision(2) << ptrPollen[i].calcPercent() << "%"
+			" of the allergies in the area are this allergy "<< endl << endl;
 	}
 }
 //*********************************************************************************
@@ -207,7 +192,7 @@ void PollenArray::mergeAscending(int const left, int const mid, int const right)
 
 void PollenArray::mergeSortAscending(int const begin, int const end)
 {
-	int before = GetTickCount();
+	
 	if (begin >= end)
 		return;
 
@@ -215,8 +200,6 @@ void PollenArray::mergeSortAscending(int const begin, int const end)
 	mergeSortAscending(begin, mid);
 	mergeSortAscending(mid + 1, end);
 	mergeAscending(begin, mid, end);
-	int after = GetTickCount();
-	cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 }
 
 void PollenArray::mergeDescending(int const left, int const mid, int const right)
@@ -268,7 +251,6 @@ void PollenArray::mergeDescending(int const left, int const mid, int const right
 
 void PollenArray::mergeSortDescending(int const begin, int const end)
 {
-	int before = GetTickCount();
 	if (begin >= end)
 		return;
 
@@ -276,6 +258,4 @@ void PollenArray::mergeSortDescending(int const begin, int const end)
 	mergeSortDescending(begin, mid);
 	mergeSortDescending(mid + 1, end);
 	mergeDescending(begin, mid, end);
-	int after = GetTickCount();
-	cout << "Merge sort took " << after - before << " milliseconds to execute." << endl;
 }
