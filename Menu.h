@@ -15,9 +15,8 @@ using namespace std;
 void addAllergyData(Country&);
 
 //*********************************************************
-//	Menu function, displays various options for the user to
-//	view different data pertaining to food allergies.
-//
+//Menu function, displays various options for the user to
+//view different data pertaining to food allergies.
 //*********************************************************
 void menuCountry()
 {
@@ -156,6 +155,10 @@ void addAllergyData(Country& newData) {
 	newData.setShellfish(shellfishData);
 }
 
+//********************************************************
+//Pollen menu function, displays various options for the user to
+//view different data pertaining to food allergies.
+//********************************************************
 void pollenMenu()
 {
 	Pollen pol;
@@ -247,20 +250,23 @@ void pollenMenu()
 	} while (enter != 0);
 }
 
+//************************************************************
+//City menu function, displays various options for the user to
+//view different data pertaining to food allergies.
+//*************************************************************
 void cityMenu() {
-	int enter = 0;
-	string cityAdd = "";
-	CityManip city;
-	int deleteChoice;
-	string cityDelete = "";
-	string citySearch = "";
-	City add;
-	double value1;
-	double value2;
-	int cityReactions;
-	int cityHospitalizations;
-	using namespace std::chrono;
+	int enter = 0;		//Holds the value of break out option
+	string cityAdd = "";	//Stores name of city to add
+	CityManip city;		//CityManip object
+	int deleteChoice;	//Holds value of break out menu option
+	string cityDelete = "";		//Holds name of city to delete
+	string citySearch = "";		//Holds name of city to search for
+	City add;			//City object
+	double value1;			//Holds value of total alergic reactions
+	double value2;			//Holds value of number of hospitalizations
+	using namespace std::chrono;	//Used to view how much time has elapsed
 	milliseconds mil(1000);
+	
 	do {
 		cout << "Press 1 to add a city" << endl;
 		cout << "Press 2 to remove a city" << endl;
@@ -272,8 +278,6 @@ void cityMenu() {
 		switch (enter) {
 		case 1:
 			
-			
-
 			cout << "Enter the name of the city you would like to add \n";
 			cout << "Followed by the number of total allergic reactions in given city \n";
 			cout << "And the total number of hospitalizations \n";
@@ -327,5 +331,3 @@ void cityMenu() {
 
 	} while (enter != 0);
 }
-
-//add menu function for city class
