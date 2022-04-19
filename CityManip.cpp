@@ -1,7 +1,14 @@
+//CityManip.cpp contains all the function definitions
+//for the cityManip class.
+
 #pragma once
 #include "CityManip.h"
 #include <windows.h>
 
+//*************************************************
+//Add city function adds a city and the number of
+//hospitalization and number of alergic reactions
+//*************************************************
 void CityManip::addCity(City cityIn)
 {
 	cityNode* tempNode = new cityNode;
@@ -19,6 +26,11 @@ void CityManip::addCity(City cityIn)
 	}
 }
 
+//*************************************************
+//Remove city function removes city along with city
+//data from the list of cities. Returns not found
+//if invalid data is entered
+//*************************************************
 void CityManip::removeCity(string cityOut)
 {
 	cityNode* tempNode = cityListHead;
@@ -51,6 +63,10 @@ void CityManip::removeCity(string cityOut)
 	delete deleteNode;
 }
 
+//************************************************
+//print cities function prints all cities and city
+//data to the output for the user to view
+//************************************************
 void CityManip::printCities()
 {
 	cityNode* tempNode = cityListHead;
@@ -66,6 +82,9 @@ void CityManip::printCities()
 
 }
 
+//*****************************************************
+//city files output function updates the external file
+//*****************************************************
 void CityManip::cityFilesOutput()
 {
 	cityNode* tempNode = cityListHead;
@@ -83,6 +102,10 @@ void CityManip::cityFilesOutput()
 	dataOut.close();
 }
 
+//******************************************************
+//search city function searches for for a city based on
+//the users input
+//******************************************************
 void CityManip::searchCity(string search)
 {
 	cityNode* tempNode = cityListHead;
@@ -108,6 +131,10 @@ void CityManip::searchCity(string search)
 	}
 }
 
+//*******************************************************
+//Read file function reads data from an external file and
+//stores data in a temporary location
+//*******************************************************
 void CityManip::readFile()
 {
 	City tempCity;
