@@ -1,12 +1,5 @@
 # CSCI41-project
 
-1.) Affected files include CountryManip.cpp, CountryManip.h, SeasonAllergy.h, and SeasonalAllergies.cpp. We had implemented a 
-merge sorting algorithm in CountryManip.cpp and SeasonalAllergies.cpp. A binary search function can be found in CountryManip.cpp
-In order to find the complexity of the sorting function, we have created a variable before and after. Before is intialized
-at the beginning of the function and after is initialized after the merging is finished. IN order to get the complexity, we
-Subtracted before from after to get the total time elapsed during the sort. This can be found during the call to the sorting
-function in our Menu.h header file. It can be found in Case 4 of the menuCountry function and Case 4 of the pollenMenu function
+1.) Affected files for this project include Menu.h, CityManip.cpp, CityManip.h, and City.h. We included the linked list in the class CityManip. We added the structure cityNode that houses the nextCity pointer and any new data beign stored as a City class object. Functions that work for this linked list include the addCity(), removeCity(), printCities(), cityFilesOutput(), searchCity(), and readFile(). All of these functions allow for the reading from an external file to a linked list, while also giving the ability to add or remove an item in the linked list. There is a search function that allows for the user to search for a certain element in the linked list and output all of its related data. In the menu function, we added a switch statement that can help curb erroneous input that the user could potentially add. 
 
-2.) In order to address some feedback, we had changed the class name of DynamicArray to CountryArray in the CountryManip.h 
-header file. This change makes it more clear as to the contents of the dynamicArray. In the future, we plan to condense the
-merge sort functions so instead of having 4 functions, we hope to have 3 or even 2 functions
+2.) In terms of what we have done to improve the project based off of feedback, we switched the GetTickCount64() function for the count() function found in the chrono header. This more accuratly displays the runtime for each action. In terms of output, we had fixed the problem where the percentage was not being properly displayed. We did this by adding a set precision that would limit it to two decimal places, while also adding a percentage sign and the meaning of this data. This makes it easier for the user to understand the information that they are looking at on the screen. 
