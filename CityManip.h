@@ -17,7 +17,6 @@ private:
 	cityNode* cityListHead = nullptr;
 	cityNode* cityListTail = nullptr;
 
-	int cityLenght = 0;
 	ofstream dataOut;
 	ifstream dataIn;
 	string cityName;

@@ -246,7 +246,10 @@ void pollenMenu()
 
 	} while (enter != 0);
 }
-
+//***********************************************************
+//
+//
+//***********************************************************
 void cityMenu() {
 	int enter = 0;
 	string cityAdd = "";
@@ -317,5 +320,18 @@ void cityMenu() {
 
 	} while (enter != 0);
 }
+/*
+void trialApplicationMenu()
+{
+	int enter = 0;
+	do {
+		cout << 
 
-//add menu function for city class
+
+		cin >> enter;
+
+
+	} while (enter != 0);
+}
+
+*/
