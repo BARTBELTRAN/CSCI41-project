@@ -9,6 +9,7 @@
 #include "SeasonalAllergy.h"
 #include <windows.h>
 #include "CityManip.h"
+#include "TrialApplicants.h"
 
 using namespace std;
 
@@ -247,8 +248,8 @@ void pollenMenu()
 	} while (enter != 0);
 }
 //***********************************************************
-//
-//
+//City menu allows access to enter, remove, view, and search
+// for city data using a linked list
 //***********************************************************
 void cityMenu() {
 	int enter = 0;
@@ -320,18 +321,27 @@ void cityMenu() {
 
 	} while (enter != 0);
 }
-/*
+
+//*******************************************************
+//Trial applicatino menu utilized a queue in order to 
+// run through list of applicants and place them in the
+// correct external file accordingly
+//*******************************************************
 void trialApplicationMenu()
 {
 	int enter = 0;
+	TrialApplicantQueue app;
+
 	do {
-		cout << 
-
-
+		cout << "Press 1 to apply for clinical trial" << endl;
 		cin >> enter;
 
+		switch (enter) {
+		case 1:
+			
+			break;
 
+		}
 	} while (enter != 0);
-}
 
-*/
+}
