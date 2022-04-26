@@ -1,0 +1,8 @@
+New York	Oak
+Los Angeles	Cypress
+Houston	Cedar
+Phoenix	Ash
+Philadelphia	Black Ash
+San Antonio	Cedar
+San Diego	California Sagebush
+Dallas	Ragweed
