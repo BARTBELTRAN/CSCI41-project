@@ -2,14 +2,14 @@
 #include <iostream>
 using namespace std;
 
-void liveCity::push(string info) {
+void liveCity::push(liveCity info) {
 	stackNode* temp = new stackNode();
 
 	if (!temp) {
 		cout << "Stack is full\n";
 		return;
 	}
-	temp->stackNode = info;
+	temp->newData = info;
 	temp->next = top;
 	top = temp;
 

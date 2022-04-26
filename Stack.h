@@ -5,9 +5,10 @@
 using namespace std;
 
 struct stackNode {
-	struct stackNode* next = nullptr;
-	string nameofCity;
-	string topAllergy;
+	stackNode* next = nullptr;
+	liveCity newData;
+	//string nameofCity;
+	//string topAllergy;
 };
 
 class liveCity {
@@ -19,7 +20,7 @@ public:
 	ifstream fileIn;
 	ofstream fileOut;
 
-	void push(string);
+	void push(liveCity);
 	double peek();
 	void pop();
 	void printStack();

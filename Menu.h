@@ -9,6 +9,8 @@
 #include "SeasonalAllergy.h"
 #include <chrono>
 #include "CityManip.h"
+#include "Stack.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -328,4 +330,32 @@ void cityMenu() {
 	} while (enter != 0);
 }
 
+void livingMenu() {
+	int enter;
+	do {
+		cout << "What this program does is it takes the existing top allergen of a city "
+			<< "and compares it to the user's top allergen, and determines what cities are "
+			<< "optimal to live in based on their allergy information provided." << endl;
+		cout << "Press 1 to add a city and its information\n";
+		cout << "Press 2 to remove a city and its information\n";
+		cout << "Press 3 to find an optimal place to live based on your allergens\n";
+		cout << "Press 0 to exit program\n";
+		cin >> setw(1) >> enter;
+
+		switch (enter) {
+		case 1:
+
+		case 2:
+
+		case 3:
+
+		case 0:
+			return;
+		default:
+			cout << "Invalid Entry! Please re enter your choice\n";
+			break;
+		}
+	} while (enter != 0);
+
+}
 //add menu function for city class
