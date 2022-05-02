@@ -11,8 +11,8 @@
 void TrialApplicantQueue::buildApplicantList()		//List of new applicants
 {
 	ifstream dataIn;					//Holds values from the newapplicants list
-	Trial* newNode = new Trial;		//Creates a new node from the trial struct
-	string preCondition;			//Holds a value for a pre existing condition
+	Trial* newNode = new Trial;			//Creates a new node from the trial struct
+	string preCondition;				//Holds a value for a pre existing condition
 	
 	dataIn.open("newApplicants.txt");		//Opens newApplicants file
 	
@@ -20,7 +20,7 @@ void TrialApplicantQueue::buildApplicantList()		//List of new applicants
 
 	//while loop reads in name, age, aggergy, pre condition, and 
 	//date of application
-	while (getline(dataIn, newNode->name))
+	while (getline(dataIn, newNode->name, '\t'))
 	{
 		dataIn >> newNode->age >> newNode->allergens >> preCondition >>
 			newNode->date;
@@ -123,6 +123,8 @@ void TrialApplicantQueue::reviewApplicants()
 	ofstream dataOutNew("newApplicants.txt");
 	ofstream dataOutAccept("acceptedApplicants.txt", fstream::app);
 
+	dataOutNew << "Name\t\tAge\t\tAllergy\t\tPre-Existing Condition\t\tDate\n";
+
 	while (trialFront != nullptr)
 	{
 		if (trialFront->age >= 8 && trialFront->age <= 80)		//does not accept aplicants too young or old
@@ -161,8 +163,18 @@ void TrialApplicantQueue::reviewApplicants()
 				dataOutAccept << "\t\t\t\t" << trialFront->date << endl;
 			break;
 			//Outputs to potental applicants
-			case 2: dataOutNew << trialFront->name << trialFront->age <<
-				trialFront->allergens << trialFront->date << endl;
+			case 2:dataOutNew << trialFront->name << "\t" << trialFront->age << "\t\t" <<
+				trialFront->allergens << "\t\t";
+
+				if (trialFront->preExistCondion)
+				{
+					dataOutNew << "yes";
+				}
+				else {
+					dataOutNew << "no";
+				}
+
+				dataOutNew << "\t\t\t\t" << trialFront->date << endl;
 			break;
 			default:
 				break;
