@@ -1,5 +1,10 @@
+// Driver 
 // This program displays the amount of people that are affected by different types of 
 // food allergies from different counties around the world.
+
+//	Project 5 Bart Beltran. Added TrialApplicants.cpp and .h. Also added to Menu.h
+//	list of applicants are enqueued to list and updated to external file. 
+//	list of applicants are then dequeued and determined to kept or erased.
 
 // Justin Soun, Bart Beltran
 
