@@ -1,4 +1,4 @@
-
+// Bart Beltran, Justin Soun
 // This functions holds the file open and menu functions
 
 #pragma once
@@ -18,7 +18,6 @@ void addAllergyData(Country&);
 //*********************************************************
 //	Menu function, displays various options for the user to
 //	view different data pertaining to food allergies.
-//
 //*********************************************************
 void menuCountry()
 {
@@ -329,18 +328,26 @@ void cityMenu() {
 //*******************************************************
 void trialApplicationMenu()
 {
-	int enter = 0;
-	TrialApplicantQueue app;
+	int enter = 0;			//used to manipulate menu
+	TrialApplicantQueue app;	//object
+	Trial* info;				//node
 
+	//menu options
 	do {
 		cout << "Press 1 to apply for clinical trial" << endl;
+		cout << "Press 2 to review the list of trial applicants" << endl;
+		cout << "Press 0 to exit the program" << endl;
 		cin >> enter;
 
 		switch (enter) {
-		case 1:
-			
+		case 1: 
+			info = app.getAppInfo(); //sets info to getAppInfo
+			app.enqueue(info);		//adds info to be enqueued
+			app.fileOut();			//updates external file
 			break;
-
+		case 2:
+			app.reviewApplicants();		//opens reviews applicant options
+			break;
 		}
 	} while (enter != 0);
 

@@ -1,3 +1,7 @@
+//Bart Beltran
+//contains the struct for Trial info and the trialapplicationqueue
+//and the privte nodes for the queue and all the functions for
+//application menu
 #pragma once
 #include <string>
 #include <fstream>
@@ -5,12 +9,13 @@
 
 using namespace std;
 
+//Holds the information of applicant and node for queue
 struct Trial
 {
-	Trial* nextApp = nullptr;
+	Trial* nextApp = nullptr;	//next pointer
 	string name;
 	int age;
-	int date;
+	string date;
 	bool preExistCondion;
 	string allergens;
 };
@@ -18,8 +23,8 @@ struct Trial
 class TrialApplicantQueue
 {
 private:
-	Trial* trialFront = nullptr;
-	Trial* trialRear = nullptr;
+	Trial* trialFront = nullptr;	//head node
+	Trial* trialRear = nullptr;		//tail node
 
 	ofstream dataOut;
 	ifstream dataIn;
@@ -31,8 +36,9 @@ public:
 	void fileOut();
 	void dequeue();
 	void reviewApplicants();
+	Trial* getAppInfo();
 	TrialApplicantQueue(){
-		buildApplicantList();
+		buildApplicantList();	//buildApplicationList constructor to build at start
 	}
 
 };

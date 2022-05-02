@@ -1,0 +1,5 @@
+Name			Age		Allergy		Pre-Existing Condition		Date
+Arthur Miller		45		kiwis		yes			04/22/2022
+Bob Stevens		58		nuts		yes			04/21/2022
+Michael Martinez	30		dairy		yes			04/24/2022
+Jackson Chen		61		Tree		yes			04/24/2022

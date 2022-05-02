@@ -10,19 +10,21 @@
 //**************************************************
 void TrialApplicantQueue::buildApplicantList()		//List of new applicants
 {
-	fstream dataIn;					//Holds values from the newapplicants list
+	ifstream dataIn;					//Holds values from the newapplicants list
 	Trial* newNode = new Trial;		//Creates a new node from the trial struct
 	string preCondition;			//Holds a value for a pre existing condition
 	
 	dataIn.open("newApplicants.txt");		//Opens newApplicants file
 	
-	dataIn.ignore(100, '\n');		//Ignores the first line of the external file
+	getline(dataIn, preCondition, '\n');		//Ignores the first line of the external file
 
 	//while loop reads in name, age, aggergy, pre condition, and 
 	//date of application
-	while (dataIn >> newNode->name >> newNode->age >> newNode->allergens >> preCondition >>
-		newNode->date)
+	while (getline(dataIn, newNode->name))
 	{
+		dataIn >> newNode->age >> newNode->allergens >> preCondition >>
+			newNode->date;
+
 		//Checks for a pre condition returning true 
 		//or false
 		if (preCondition == "yes")
@@ -40,59 +42,68 @@ void TrialApplicantQueue::buildApplicantList()		//List of new applicants
 	}
 }
 
-//*************************************************
-//Enqueue function adds node and into the front of
-// the que
-//*************************************************
+//******************************************************
+//Enqueue function adds node and into the front of the
+//queue from the buildApplicantList function
+//******************************************************
 void TrialApplicantQueue::enqueue(Trial* appNode)
 {
-	if (trialFront == nullptr)
+	if (trialFront == nullptr)		//checks for empty queue
 	{
-		trialFront = appNode;
-		trialRear = appNode;
+		trialFront = appNode;		//appNode becomes head
+		trialRear = appNode;		//appNode becomes tail
 	}
-	else {
-		trialRear->nextApp = appNode;
-		trialRear = appNode;
+	else {								//queue is not empty
+		trialRear->nextApp = appNode;	//tails next points to appNode
+		trialRear = appNode;			//appNode becomes tail
 	}
 }
 
+//************************************************************
+//Outputs queued list to the external file, newApplicants.txt
+//************************************************************
 void TrialApplicantQueue::fileOut()
 {
 	fstream dataOut("newApplicants.txt");
-	Trial* traverse = trialFront;
+	Trial* traverse = trialFront;			//traverse stars at head
 
+	//user categories
 	dataOut << "Name\t\tAge\t\tAllergy\t\tPre-Existing Condition\t\tDate\n";
 	
-	while (traverse != nullptr)
+	while (traverse != nullptr)		//check if traverse had data
 	{
-
+		//outputs user info
 		dataOut << traverse->name << "\t\t" << traverse->age << "\t\t" <<
 			traverse->allergens << "\t\t";
 		
-		if (traverse->preExistCondion)
+		//bool value, changes output to yes or no
+		if (traverse->preExistCondion)		
 		{
-			dataOut << "yes\t\t";
+			dataOut << "yes";
 		}
 		else
 		{
-			dataOut << "no\t\t";
+			dataOut << "no";
 		}
+		dataOut << "\t\t\t";
 
 		dataOut << traverse->date << endl;
 
-		traverse = traverse->nextApp;
+		traverse = traverse->nextApp;	//points to next user in list or null
 	}
 
 }
 
+//***************************************************
+// Dequeues applicant node out of the list
+//***************************************************
 void TrialApplicantQueue::dequeue()
 {
-	Trial* temp = trialFront;
+	Trial* temp = trialFront;		//Sets temporary node to head
 
-	if (temp != nullptr)
+	if (temp != nullptr)		//Whlie queue is not empty
 	{
-		trialFront = trialFront->nextApp;
+		trialFront = trialFront->nextApp;	//trialFront point to next node
 
 		delete temp;
 	}
@@ -105,14 +116,16 @@ void TrialApplicantQueue::dequeue()
 //*************************************************************
 void TrialApplicantQueue::reviewApplicants()
 {
-	bool age;
-	int enter;
+	bool age;				//holds user age
+	bool check = false;		//holds bool for potential applicants
+	int enter;				//used to manipulate menu
+
 	ofstream dataOutNew("newApplicants.txt");
 	ofstream dataOutAccept("acceptedApplicants.txt", fstream::app);
 
 	while (trialFront != nullptr)
 	{
-		if (trialFront->age >= 8 && trialFront->age <= 80)
+		if (trialFront->age >= 8 && trialFront->age <= 80)		//does not accept aplicants too young or old
 		{
 			age = true;
 		}
@@ -121,8 +134,11 @@ void TrialApplicantQueue::reviewApplicants()
 			age = false;
 		}
 
-		if (trialFront->preExistCondion && age)
+		if (trialFront->preExistCondion && age)		//must have pre-existing condition and correct age
 		{
+			check = true;		//initialize check
+
+			//Sub menu for potential applicant
 			cout << trialFront->name << " is a potential applicant\n";
 			cout << "Press 1 to accept " << trialFront->name <<
 				" or 2 to decline " << trialFront->name << endl;
@@ -130,41 +146,84 @@ void TrialApplicantQueue::reviewApplicants()
 			
 			switch (enter)
 			{
-			case 1: dataOutAccept << trialFront->name << trialFront->age <<
+			//Outputs to accepted applicant file
+			case 1: dataOutAccept << trialFront->name << "\t" << trialFront->age << "\t\t" <<
+				trialFront->allergens << "\t\t";
+
+				if (trialFront->preExistCondion) 
+				{
+					dataOutAccept << "yes";
+				}
+				else {
+					dataOutAccept << "no";
+				}
+				
+				dataOutAccept << "\t\t\t\t" << trialFront->date << endl;
+			break;
+			//Outputs to potental applicants
+			case 2: dataOutNew << trialFront->name << trialFront->age <<
 				trialFront->allergens << trialFront->date << endl;
-				dequeue();
-				break;
-			case2: dataOutNew << trialFront->name << trialFront->age <<
-				trialFront->allergens << trialFront->date << endl;
-			dequeue();
 			break;
 			default:
 				break;
 			}
 		}
-		
+		dequeue();	//call to dequeue function
 	}
 
+	if (!check) {
+		cout << "No qualifying applicants were found in the list\n";
+	}
+
+	buildApplicantList();	//rebuild applicant list
 }
 
+//*******************************************************************
+//Sets the applicant information corresponding to the Trial* struct,
+// name, age, allergy type, pre-existing condition and date
+//*******************************************************************
+Trial* TrialApplicantQueue::getAppInfo()
+{
+	Trial* newInfo;			//holds the info of applicants
+	newInfo = new Trial;	//dynamic node
+	string check;			//holds value of pre-existing condition
 
+	cin.ignore();		//ignores check value, getline used right after
 
-//Good stuff
-/*
-cout << "Enter your current allergy type: \n";
-	cout << "Enter 1 for food Allergy: \n Enter 2 for pollen allergy: \n";
+	cout << "Please enter your name" << endl;		//gets name
+	getline(cin, newInfo->name);
 
-	switch (enter)
+	cout << "Please enter your age" << endl;		//gets age
+	cin >> newInfo->age;						
+
+	cout << "What are you allergic too" << endl;	//gets allergy type
+	cin >> newInfo->allergens;
+
+	//check for pre-existing condition
+	do
 	{
-	case 1:
-		cout << "Food Allergy";
-		break;
-	case 2:
-		cout << "Pollen Allergy";
-		break;
-	default:
-		break;
-	}
+		cout << "Do you have any pre existing conditions(enter yes or no)" << endl;
+		cin >> check;
+		
+		//handles erroneous error for check value
+		for (int i = 0; i < check.length(); ++i)
+		{
+			check.at(i) = tolower(check.at(i));	//changes check to lower case
+		}
 
+		if (check == "yes")
+		{
+			newInfo->preExistCondion = true;
+		}
+		else
+		{
+			newInfo->preExistCondion = false;
+		}
 
-*/
+	} while (check != "yes" && check != "no");
+
+	cout << "Please enter todays date" << endl;		//gets date
+	cin >> newInfo->date;	
+
+	return newInfo;	//returns info of newInfo
+}
