@@ -1,15 +1,6 @@
 # CSCI41-project
 
-1.) Affected files include CountryManip.cpp, CountryManip.h, SeasonAllergy.h, and SeasonalAllergies.cpp. We had implemented a 
-merge sorting algorithm in CountryManip.cpp and SeasonalAllergies.cpp. A binary search function can be found in CountryManip.cpp
-In order to find the complexity of the sorting function, we have created a variable before and after. Before is intialized
-at the beginning of the function and after is initialized after the merging is finished. IN order to get the complexity, we
-Subtracted before from after to get the total time elapsed during the sort. This can be found during the call to the sorting
-function in our Menu.h header file. It can be found in Case 4 of the menuCountry function and Case 4 of the pollenMenu function
+1.) Affected files include menu.h, Stack.h, and Stack.cpp. 
+The stack is implemented in files Stach.h and Stack.cpp. It includes the functions, push, pop, and peek along with a copy constructor, destructor, and an overloaded operator. 
 
-2.) In order to address some feedback, we had changed the class name of DynamicArray to CountryArray in the CountryManip.h 
-header file. This change makes it more clear as to the contents of the dynamicArray. In the future, we plan to condense the
-merge sort functions so instead of having 4 functions, we hope to have 3 or even 2 functions
-
-CountryManip.cpp lines 271 - 414
-SeasonalAllergies.cpp lines 151 - 273
+2.) I decided to roll with the idea of constantly popping a stack in order to find an optimal place to live for someone that is burdened with allergies based on prior feedback.
