@@ -1,7 +1,7 @@
 #include "Stack.h"
 #include <iostream>
 using namespace std;
-
+//Reads in data from file
 void liveCity::fileInput() {
 	fileIn.open("cityAllergyData.txt");
 	liveCity input;
@@ -16,20 +16,22 @@ void liveCity::fileInput() {
 	}
 	fileIn.close();
 }
-
+//Adds objects to stack
 void liveCity::push(liveCity& info) {
 	cities = new liveCity[size++];
 	cities[++top] = info;
 }
-
+//Deletes top object and returns top object
 liveCity liveCity::pop() {
+	liveCity topOfStack = peek();
+	cout << topOfStack.getNameOfCity();
 	return cities[top--];
 }
-
+//This function looks at the top object in stack
 liveCity liveCity::peek() {
 		return cities[top];
 }
-
+//This program outputs data to the external file
 void liveCity::fileOutput() {
 	liveCity temp;
 	fileOut.open("cityAllergyData.txt");
@@ -39,26 +41,29 @@ void liveCity::fileOutput() {
 	}
 	fileOut.close();
 }
-
+//checks to see if top is equal to -1
+//If it is, the isEmpty will return true
 bool liveCity::isEmpty() {
 	return top == -1;
 }
-
+//Destructor
 liveCity::~liveCity(){
 	delete[] cities;
 }
-
-
+//Copy Constructor
 liveCity::liveCity(const liveCity& temp){
 	nameOfCity = temp.nameOfCity;
 	topAllergy = temp.topAllergy;
 
 }
-
+//Overloading the "=" operator
 liveCity liveCity::operator=(const liveCity&){
 	return liveCity();
 }
 
+//This function continuosly pops the stack and as long as 
+//the allergy data for the objects in the stack do not match
+//the user inputted allergy, it will reccomend the city to the user.
 void liveCity::cityComparison(string allergyTop){
 	liveCity data;
 	int choice;
@@ -80,10 +85,3 @@ void liveCity::cityComparison(string allergyTop){
 	} while (isEmpty() == false);
 }
 
-/*Potential Ideas for Stacks Project
-Make a list of big cities and the most prevalent allergy in that country 
-then ask user for their allergies then compare those all to the countries
-then use the program to spit out the top countries that don't have that allergy
-or less of that allergy. give the user an option to say if it was a good suggestion
-if yes, end program, if no, output the next top city.
-*/
