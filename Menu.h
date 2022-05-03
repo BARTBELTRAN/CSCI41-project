@@ -332,10 +332,16 @@ void cityMenu() {
 
 void livingMenu() {
 	int enter;
+	string cityName;
+	string allergy;
+	liveCity addData;
+	int deleteChoice;
+	string userAllergy;
+	addData.fileInput();
 	do {
 		cout << "What this program does is it takes the existing top allergen of a city "
 			<< "and compares it to the user's top allergen, and determines what cities are "
-			<< "optimal to live in based on their allergy information provided." << endl;
+			<< "optimal to live in based on their allergy information provided.\n" << endl;
 		cout << "Press 1 to add a city and its information\n";
 		cout << "Press 2 to remove a city and its information\n";
 		cout << "Press 3 to find an optimal place to live based on your allergens\n";
@@ -344,15 +350,38 @@ void livingMenu() {
 
 		switch (enter) {
 		case 1:
-
+			cout << "What is the name of the city you would like to add: ";
+			cin >> cityName;
+			addData.setNameOfCity(cityName);
+			cout << "\nWhat is the top allergy of " << addData.getNameOfCity() <<
+				": ";
+			cin >> allergy;
+			addData.setTopAllergy(allergy);
+			addData.push(addData);
+			break;
 		case 2:
+			cout << "Are you sure you would like to delete the last item " <<
+				"added to the list (Press 1 to proceed or 0 to continue): ";
+			cin >> deleteChoice;
 
+			if (deleteChoice == 1) {
+				addData.pop();
+				
+			}
+			else if (deleteChoice == 0) {
+				cout << "\nDeletion has been cancelled.\n";
+				break;
+			}
+			break;
 		case 3:
-
+			cout << "Please enter your top allergy: ";
+			cin >> userAllergy;
+			addData.cityComparison(userAllergy);
+			break;
 		case 0:
 			return;
 		default:
-			cout << "Invalid Entry! Please re enter your choice\n";
+			cout << "Invalid Entry! Please re-enter your choice\n";
 			break;
 		}
 	} while (enter != 0);

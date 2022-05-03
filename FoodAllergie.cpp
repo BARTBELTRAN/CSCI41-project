@@ -19,6 +19,7 @@ int main()
 		cout << "Enter 1 for the country menu" << endl <<
 			"Enter 2 for the Pollen menu" << endl <<
 			"Enter 3 for the City menu" << endl <<
+			"Press 4 for City Living Menu" << endl <<
 			"Press 9 to exit" << endl;
 		cin >> opMenu;
 		
@@ -32,6 +33,9 @@ int main()
 			break;
 		case 3: 
 			cityMenu();					//Call to city menu function
+			break;
+		case 4:
+			livingMenu();
 			break;
 		default:
 			break;

@@ -2,72 +2,84 @@
 #include <iostream>
 using namespace std;
 
-void liveCity::push(liveCity info) {
-	stackNode* temp = new stackNode();
-
-	if (!temp) {
-		cout << "Stack is full\n";
-		return;
-	}
-	temp->newData = info;
-	temp->next = top;
-	top = temp;
-
-}
-
-double liveCity::peek() {
-	if (top != nullptr) {
-		return top->newData;
-	}
-	else {
-		return;
-	}
-}
-
-void liveCity::pop() {
-	stackNode* temp;
-	if (top == nullptr) {
-		cout << "Stack is empty\n";
-		return;
-	}
-	else {
-		temp = top;
-		top = top->newData;
-		delete temp;
-	}
-}
-
-void liveCity::printStack() {
-	stackNode* temp;
-
-	if (top == nullptr) {
-		cout << "Stack is empty\n";
-		return;
-	}
-	else {
-		temp = top;
-
-		while (temp != nullptr) {
-			cout << temp->nameOfCity << endl; //Have 2 couts one or city name and allergy data
-			temp = temp->next;
-		}
-	}
-}
-
 void liveCity::fileInput() {
 	fileIn.open("cityAllergyData.txt");
-	liveCity data;
-	string cityName;
-	string allergyInfo;
+	liveCity input;
 
-	while (fileIn >> cityName) {
-		fileIn >> cityName;
-		data.setNameOfCity(cityName);
-		fileIn >> allergyInfo;
-		data.setTopAllergy(allergyInfo);
-		push(data);
+	while (fileIn) {
+		fileIn >> nameOfCity;
+		input.setNameOfCity(nameOfCity);
+		fileIn >> topAllergy;
+		input.setNameOfCity(topAllergy);
+		push(input);
+		numOfCities++;
 	}
+	fileIn.close();
 }
+
+void liveCity::push(liveCity& info) {
+	cities = new liveCity[size++];
+	cities[++top] = info;
+}
+
+liveCity liveCity::pop() {
+	return cities[top--];
+}
+
+liveCity liveCity::peek() {
+		return cities[top];
+}
+
+void liveCity::fileOutput() {
+	liveCity temp;
+	fileOut.open("cityAllergyData.txt");
+
+	while (isEmpty() == false) {
+		fileOut << temp.getNameOfCity() << "/t" << temp.getTopAllergy() << endl;
+	}
+	fileOut.close();
+}
+
+bool liveCity::isEmpty() {
+	return top == -1;
+}
+
+liveCity::~liveCity(){
+	delete[] cities;
+}
+
+
+liveCity::liveCity(const liveCity& temp){
+	nameOfCity = temp.nameOfCity;
+	topAllergy = temp.topAllergy;
+
+}
+
+liveCity liveCity::operator=(const liveCity&){
+	return liveCity();
+}
+
+void liveCity::cityComparison(string allergyTop){
+	liveCity data;
+	int choice;
+	do {
+		data = pop();
+		if (data.getTopAllergy() != allergyTop) {
+			cout << "Would you like to live in " << data.getNameOfCity() <<
+				" where the top allergy is " << data.getTopAllergy() << "?\n";
+			cout << "Press 1 for yes or 2 for no: ";
+			cin >> choice;
+			if (choice == 1) {
+				cout << "You have chosen " << data.getNameOfCity() <<
+					" as a place to live.\n";
+			}
+			else if (choice == 2) {
+				continue;
+			}
+		}
+	} while (isEmpty() == false);
+}
+
 /*Potential Ideas for Stacks Project
 Make a list of big cities and the most prevalent allergy in that country 
 then ask user for their allergies then compare those all to the countries
