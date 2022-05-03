@@ -352,3 +352,17 @@ void trialApplicationMenu()
 	} while (enter != 0);
 
 }
+
+void acceptedApplicantStatistics();
+{
+	int enter;
+
+	do
+	{	
+		cout << "Press 1 to view applicant age\n";
+		cout << "Press 2 to view applicant allergy type\n";
+
+
+
+	} while (!enter);
+}

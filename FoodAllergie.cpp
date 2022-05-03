@@ -42,6 +42,8 @@ int main()
 		case 4:							//Call to clinical trial application function
 			trialApplicationMenu();
 			break;
+		case 5:
+			acceptedApplicantStatistics();	//call to manipulate applicant list
 		default:
 			break;
 		}
@@ -50,7 +52,3 @@ int main()
 	return 0;
 
 }
-
-
-
-

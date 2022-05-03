@@ -1,0 +1,3 @@
+Total number of Birch pollen cases is 49000
+Total number of oak pollen cases is 41000
+Total number of Elm pollen cases is 42000
