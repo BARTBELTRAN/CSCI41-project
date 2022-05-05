@@ -3,9 +3,9 @@
 //Default constructor that sets all values to null
 //and calls fileInput()
 hashTable::hashTable(){
-	names = new Hash* [SIZE];
-	dummyNode = new Hash* [SIZE];
-	for (int i = 0; i < SIZE; i++) {
+	names = new Hash* [size];
+	dummyNode = new Hash* [size];
+	for (int i = 0; i < size; i++) {
 		names[i] = NULL;
 		dummyNode[i] = NULL;
 	}
@@ -17,14 +17,13 @@ hashTable::hashTable(){
 //position until next available one is found
 void hashTable::put(string key, string value){
 	int hashKey = keyCode(key);
-	while (names[hashKey] != NULL && names[hashKey]->getKey() != key) {
-		hashKey = (hashKey + 1) % SIZE;
-	}
-	if (names[hashKey] == NULL) {
-		delete names[hashKey];
-	}
-	names[hashKey] = new Hash(key, value);
 	
+	while (names[hashKey] != NULL && names[hashKey]->getKey() != key) {
+		hashKey = (hashKey + 1) % size;
+	}
+	if (names[hashKey] == NULL && names[hashKey]->getKey() == key) {
+		
+	}
 }
 
 //Function iterates through string and converts
@@ -43,7 +42,7 @@ int hashTable::convertToAscii(string key){
 int hashTable::keyCode(string key){
 	int ascii = convertToAscii(key);
 
-	int hashKey = ascii % SIZE;
+	int hashKey = ascii % size;
 	return hashKey;
 }
 
@@ -55,11 +54,12 @@ string hashTable::deleteHash(string key){
 
 	while (names[index] != NULL) {
 		if (names[index]->getKey() == key) {
-			names[index] = dummyNode;
+			size--;
+			//names[index] = dummyNode;
 			return "Value deleted\n";
 		}
 		index++;
-		index = index % SIZE;
+		index = index % size;
 	}
 	return "Value not found\n";
 }
@@ -74,12 +74,12 @@ string hashTable::get(string key){
 		if (names[index]->getKey() == key) {
 			return names[index]->getValue();
 		}
-		if (i > SIZE) {
+		if (i > size) {
 			return "That does not exist\n";
 		}
 		i++;
 		index++;
-		index = index % SIZE;
+		index = index % size;
 	}
 }
 
@@ -91,7 +91,7 @@ void hashTable::fileInput(){
 
 	fileIn.open("countryAllergy.txt");
 
-	for (int i = 0; i < SIZE; i++) {
+	for (int i = 0; i < size; i++) {
 		fileIn >> allergyKey >> allergyValue;
 		put(allergyKey, allergyValue);
 	}

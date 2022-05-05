@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include "Menu.h"
+#include "HashTable.h"
 using namespace std;
 
 
@@ -12,7 +13,7 @@ using namespace std;
 int main()
 {	
 	int opMenu = 0;
-	
+	hashTable data;
 	int after = 0;
 	while (opMenu != 9)
 	{
@@ -29,6 +30,9 @@ int main()
 		case 2:
 			pollenMenu();	///Call to pollen menu funtion
 			break;
+		case 3:
+			data.put("China", "55");
+			cout << data.get("China") << endl;
 		default:
 			break;
 		}

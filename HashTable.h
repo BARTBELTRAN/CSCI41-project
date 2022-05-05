@@ -4,7 +4,6 @@
 #include <fstream>
 using namespace std;
 
-const int SIZE = 8;
 
 class Hash {
 private:
@@ -21,6 +20,7 @@ public:
 	string getValue() { return value; }
 };
 
+
 class hashTable {
 private:
 	Hash** names;
@@ -28,7 +28,7 @@ private:
 public:
 	ifstream fileIn;
 	ofstream fileOut;
-
+	int size = 8;
 	hashTable();
 	void put(string key, string value);
 	int convertToAscii(string key);
