@@ -1,0 +1,8 @@
+USA	320000000
+England	447700000
+Canada	36110000
+Australia 4600000
+Germany 25000000
+France 10000
+Ireland 470000
+Spain 4300000
