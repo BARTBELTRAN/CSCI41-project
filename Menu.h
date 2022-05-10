@@ -8,7 +8,7 @@
 #include "CountryManip.h"
 #include "SeasonalAllergy.h"
 #include <windows.h>
-
+#include "HashTable.h"
 
 using namespace std;
 
@@ -260,3 +260,54 @@ void pollenMenu()
 	} while (enter != 0);
 }
 
+void hashMenu() {
+	int enter = -1;
+	hashTable temp;
+	string addKey = "";
+	string addValue = "";
+	string countryDelete;
+	int deleteChoice;
+	string countryGet;
+	temp.viewCountry();
+	cout << endl;
+	do {
+		cout << "Press 1 to add a country and its data\n";
+		cout << "Press 2 to delete a country and its data\n";
+		cout << "Press 3 to search for a certain country's data\n";
+		cout << "Press 0 to exit program\n\n";
+		cin >> enter;
+
+		switch (enter) {
+		case 1:
+			cout << "What is the name of the country you would like to add: ";
+			cin >> addKey;
+			cout << "\nWhat is the estimated population affected by allergies: ";
+			cin >> addValue;
+			temp.insert(addKey, addValue);
+			break;
+		case 2:
+			cout << "Would you like to continue deleting a country and its data?";
+			cout << " This will permanently get rid of its data " <<
+				"\n Press 1 to continue or 0 to exit: ";
+			cin >> deleteChoice;
+			if (deleteChoice == 1) {
+				cout << "Continuing to delete country";
+				cout << "\n What is the name of the country you would like to delete: ";
+				cin >> countryDelete;
+				temp.deleteHash(countryDelete);
+			}
+			break;
+		case 3:
+			cout << "What is the name of the country you would like to see data for: ";
+			cin >> countryGet;
+			cout << temp.addComma(temp.get(countryGet)) << endl;
+			break;
+		case 0:
+			return;
+		default:
+			cout << "That is not a valid option, please re-enter your choice: ";
+			cin >> enter;
+		}
+	} while (enter != 0);
+
+}

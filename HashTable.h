@@ -23,17 +23,20 @@ public:
 
 class hashTable {
 private:
-	Hash** names;
-	Hash** dummyNode;
+	Hash** names; //declaration for an array of pointers named names
+	Hash** dummyNode; //declaration for an array of pointers named dummyNode
 public:
 	ifstream fileIn;
 	ofstream fileOut;
 	int size = 8;
 	hashTable();
-	void put(string key, string value);
+	void insert(string key, string value);
 	int convertToAscii(string key);
 	int keyCode(string key);
 	void fileInput();
 	string deleteHash(string key);
 	string get(string key);
+	void fileOutput();
+	string addComma(string number);
+	void viewCountry();
 };

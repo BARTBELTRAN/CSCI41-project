@@ -19,20 +19,20 @@ int main()
 	{
 		cout << "Enter 1 for the country menu" << endl <<
 			"Enter 2 for the Pollen menu" << endl <<
+			"Enter 3 for the Allergy Population menu" << endl <<
 			"Press 9 to exit" << endl;
 		cin >> opMenu;
 		
 		switch (opMenu)
 		{
-		case 1:
+		case 1: 
 			menuCountry();				//Call to allergy menu function
 			break;
-		case 2:
+		case 2: 
 			pollenMenu();	///Call to pollen menu funtion
 			break;
-		case 3:
-			data.put("China", "55");
-			cout << data.get("China") << endl;
+		case 3: 
+			hashMenu();
 		default:
 			break;
 		}
