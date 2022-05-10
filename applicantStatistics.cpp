@@ -1,3 +1,5 @@
+//function definitions for the hash, search, add, and delete
+
 //Bart Beltran
 //Project 6 Hash tables
 //Function definitions for hash table
@@ -15,6 +17,22 @@ int applicantStatistics::Hash(string key)
 		val += element * 2749;
 	}
 	return val % 8;		//0 - 8 buckets
+}
+
+//searches for a allergy type
+int applicantStatistics::searchHash(string allergen)
+{
+	int bucket = Hash(allergen);
+
+	return hashTable[bucket].search(allergen);
+}
+
+//searches for an age
+int applicantStatistics::searchHash(int yearsOld)
+{
+	int bucket = Hash(to_string(yearsOld));
+
+	return hashTable[bucket].search(yearsOld);
 }
 
 //adds value to bucket for strings
@@ -48,5 +66,39 @@ void applicantStatistics::deleteHash(int age)
 {
 	int bucket = Hash(to_string(age));
 
-	hashTable[bucket].deleteNode(to_string(age));
+	hashTable[bucket].deleteNode(age);
+}
+
+//reads in acceptedApplicants.txt file
+void applicantStatistics::readFile(bool ageAllergyOpt)
+{
+	fstream dataIn;
+	int integer;	//used to set and ignore data
+	string input;	//used to set and ignore data
+
+	dataIn.open("acceptedApplicants.txt");
+
+	getline(dataIn, input, '\n');		//ignore for line in txt file
+
+	if (ageAllergyOpt)		//checks for integer
+	{
+		//only uses int as addHash parameter
+		while (getline(dataIn, input, '\n'))
+		{
+			dataIn >> integer;
+			addHash(integer);
+			dataIn >> input >> input >> input;
+		}
+	}
+	//checks for string
+	else
+	{
+		//only uses string as addhash parameter
+		while (getline(dataIn, input, '\n'))
+		{
+			dataIn >> integer >> input;
+			addHash(input);
+			dataIn >> input >> input;
+		}
+	}
 }

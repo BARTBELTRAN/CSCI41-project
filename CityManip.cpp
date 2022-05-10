@@ -2,6 +2,7 @@
 #include "CityManip.h"
 #include <windows.h>
 
+
 void CityManip::addCity(City cityIn)
 {
 	int begin = GetTickCount64();

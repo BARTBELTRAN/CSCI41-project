@@ -125,6 +125,7 @@ void TrialApplicantQueue::reviewApplicants()
 
 	dataOutNew << "Name\t\tAge\t\tAllergy\t\tPre-Existing Condition\t\tDate\n";
 
+	//goes through the list
 	while (trialFront != nullptr)
 	{
 		if (trialFront->age >= 8 && trialFront->age <= 80)		//does not accept aplicants too young or old

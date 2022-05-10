@@ -10,6 +10,7 @@
 #include <windows.h>
 #include "CityManip.h"
 #include "TrialApplicants.h"
+#include "applicantStatistics.h"
 
 using namespace std;
 
@@ -353,16 +354,48 @@ void trialApplicationMenu()
 
 }
 
-void acceptedApplicantStatistics();
+//**********************************************************
+//Uses hash functions to add, delete, or search a specific 
+// applicants age or allergy type.
+//**********************************************************
+void acceptedApplicantStatistics()
 {
 	int enter;
+	int age;
+	int allergy;
 
+	//enters menu
 	do
 	{	
-		cout << "Press 1 to view applicant age\n";
-		cout << "Press 2 to view applicant allergy type\n";
+		applicantStatistics stats;		//hash object
 
+		cout << "Press 1 to view applicant age data\n";
+		cout << "Press 2 to view applicant allergy type data\n";
+		cin >> enter;
 
+		switch (enter)
+		{
+		case 1:				//enters age options
+			int choice;		//holds value for sub-menu options
+			do
+			{	
+				stats.readFile(true);		//function call to read file
 
-	} while (!enter);
-}
+				cout << "E\n";
+				cin >> age;
+				stats.searchHash(age);
+			} while (choice != 0);
+			break;
+		case 2:				//enters allergy options
+			int choice;		//holds value for sub-menu options
+			do
+			{
+				stats.readFile(false);		//function call to read file
+
+				cout << "Enter the allergy name to find the number of instances\n";
+				stats.searchHash(allergy);
+
+			} while (choice != 0);
+			break;
+		}
+	} while (enter != 0);

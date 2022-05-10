@@ -43,7 +43,7 @@ int main()
 			trialApplicationMenu();
 			break;
 		case 5:
-			acceptedApplicantStatistics();	//call to manipulate applicant list
+			//acceptedApplicantStatistics();	//call to manipulate applicant list
 		default:
 			break;
 		}
