@@ -59,8 +59,8 @@ string hashTable::deleteHash(string key){
 
 	while (names[index] != NULL) {
 		if (names[index]->getKey() == key) {
-			size--;
 			names[index] = dummyNode[index];
+			size--;
 			return "Value deleted\n";
 		}
 		index++;
@@ -90,16 +90,18 @@ string hashTable::get(string key){
 }
 
 void hashTable::fileOutput(){
+	for (int i = 0; i < size; i++) {
+		if (names[i] != NULL) {
+			fileOut << names[i]->getKey() << "\t" << names[i]->getValue() << endl;
+		}
+	}
 }
 
 string hashTable::addComma(string number){
-	int count = 0;
-	for (int i = number.length(); i >= 0; i--) {
-		if (count == 3) {
-			number.insert(i, ",");
-			count = 0;
-		}
-		count++;
+	int counter = number.length() - 3;
+
+	for (int i = 0; counter > 0; counter -= 3) {
+		number.insert(counter, ",");
 	}
 	return number;
 }
