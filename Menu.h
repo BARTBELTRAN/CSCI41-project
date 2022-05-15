@@ -362,40 +362,88 @@ void acceptedApplicantStatistics()
 {
 	int enter;
 	int age;
-	int allergy;
+	string allergy;
 
 	//enters menu
 	do
-	{	
+	{
 		applicantStatistics stats;		//hash object
 
 		cout << "Press 1 to view applicant age data\n";
 		cout << "Press 2 to view applicant allergy type data\n";
+		cout << "Press 0 to exit\n";
 		cin >> enter;
 
 		switch (enter)
 		{
-		case 1:				//enters age options
-			int choice;		//holds value for sub-menu options
+		case 1:							//enters age options
+			int choice;					//holds value for sub-menu options
+			stats.readFile(true);		//function call to read file, true for int
 			do
-			{	
-				stats.readFile(true);		//function call to read file
+			{
+				cout << "Enter 1 to search for age data\n";
+				cout << "Enter 2 to add age data\n";
+				cout << "Enter 3 to delete age data\n";
+				cout << "Enter 0 to exit\n\n";
 
-				cout << "E\n";
-				cin >> age;
-				stats.searchHash(age);
+				cin >> choice;
+				switch (choice)
+				{
+				case 1: cout << "Enter the age you would like to search for: \n";
+					cin >> age;
+					cout << "There are " << stats.searchHash(age) << " applicant(s) with " <<
+							" that age found in the file\n\n";
+					break;
+				case 2: cout << "Enter the age you would like to add\n";
+					cin >> age;
+					stats.addHash(age);						//function call to add age
+					stats.outputFile(true);					//outputs to file
+					break;
+				case 3: cout << "Enter the age you would like to delete\n";
+					cin >> age;
+					stats.deleteHash(age);					//function to delete all age
+					stats.outputFile(true);					//output to file
+					break;
+				default:
+					break;
+				}
+
 			} while (choice != 0);
 			break;
 		case 2:				//enters allergy options
-			int choice;		//holds value for sub-menu options
+			int chose;		//holds value for sub-menu options
+
+			stats.readFile(false);		//function call to read file, false for string
 			do
 			{
-				stats.readFile(false);		//function call to read file
+				cout << "Enter 1 to search for allergy data\n";
+				cout << "Enter 2 to add allergy data\n";
+				cout << "Enter 3 to delete all instances allergy data\n";
+				cout << "Enter 0 to exit\n\n";
 
-				cout << "Enter the allergy name to find the number of instances\n";
-				stats.searchHash(allergy);
-
-			} while (choice != 0);
+				cin >> chose;
+				switch (chose)
+				{
+				case 1: cout << "Enter the allergy you would like to search for: \n";
+					cin >> allergy;
+					cout << "There are " << stats.searchHash(allergy) << " applicant(s) with " <<
+							" that allergy found in the file\n\n";
+					break;
+				case 2: cout << "Enter the allergy you would like to add\n";
+					cin >> allergy;
+					stats.addHash(allergy);						//function call to add allergy
+					stats.outputFile(false);					//outputs to file
+					break;
+				case 3: cout << "Enter the allergy you would like to delete\n";
+					cin >> allergy;
+					stats.deleteHash(allergy);		//delete all instances of allergy
+					stats.outputFile(false);		//call to output file
+					break;
+				default:
+					break;
+				}
+			} while (chose != 0);	//0 to exit
 			break;
 		}
-	} while (enter != 0);
+	} while (enter != 0);			//0 to exit
+}

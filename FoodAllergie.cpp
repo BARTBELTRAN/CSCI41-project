@@ -6,6 +6,9 @@
 //	list of applicants are enqueued to list and updated to external file. 
 //	list of applicants are then dequeued and determined to kept or erased.
 
+//	Project 6 Bart Beltran. Added applicantStatisticsList.cpp . h. Also added applicantStatistics.cpp
+//  and .h which hash the values of allery and age from trial applicants 
+
 // Justin Soun, Bart Beltran
 
 #include <iostream>
@@ -25,8 +28,10 @@ int main()
 			"Enter 2 for the Pollen menu" << endl <<
 			"Enter 3 for the City menu" << endl <<
 			"Enter 4 for the clinical trial application\n" <<
-			"Press 9 to exit" << endl;
+			"Enter 5 for the clinical trial applicant statistics list\n" <<
+			"Press 9 to exit" << endl << endl;
 		cin >> opMenu;
+		cout << "Number entered : " << opMenu << endl << endl;
 		
 		switch (opMenu)
 		{
@@ -43,7 +48,7 @@ int main()
 			trialApplicationMenu();
 			break;
 		case 5:
-			//acceptedApplicantStatistics();	//call to manipulate applicant list
+			acceptedApplicantStatistics();	//call to manipulate applicant list
 		default:
 			break;
 		}

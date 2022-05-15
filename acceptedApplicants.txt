@@ -1,4 +1,5 @@
 Name		Age		Allergy		Pre-existing condition		Date
 Alex Cordova	25		dairy		yes				04/22/2022
 Carl Johnson	36		seasame		yes				04/22/2022
-brad	22		soy		yes				04/22/2022
+brad		22		soy		yes				04/22/2022
+jon		43		soy		yes				04/12/2022

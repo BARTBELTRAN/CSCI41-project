@@ -121,7 +121,7 @@ void TrialApplicantQueue::reviewApplicants()
 	int enter;				//used to manipulate menu
 
 	ofstream dataOutNew("newApplicants.txt");
-	ofstream dataOutAccept("acceptedApplicants.txt", fstream::app);
+	ofstream dataOutAccept("acceptedApplicants.txt", fstream::app); //opens in append mode
 
 	dataOutNew << "Name\t\tAge\t\tAllergy\t\tPre-Existing Condition\t\tDate\n";
 

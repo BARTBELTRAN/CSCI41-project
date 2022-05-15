@@ -98,72 +98,56 @@ void applicantStatisticsList::add(int yearsOld)
 }
 
 //searches for an allergy type
-int applicantStatisticsList::search(string allergen)
+int applicantStatisticsList::search(string allergen) const
 {
-	AppNode* tempNode = head;
-	AppNode* deleteNode = nullptr;
-	bool found = false;
+	AppNode* tempNode = head;		//initialize tempnode to head
 
-
-	while (tempNode != nullptr)
+	//travers the list
+	while (tempNode != nullptr)		//while not nullptr
 	{
-		if (tempNode->allergy == allergen)
+		if (tempNode->allergy == allergen)	//if parameter is found in list
 		{
-			found = true;
-			return tempNode->count;
-			break;
+			return tempNode->count;			//return count
 		}
 		tempNode = tempNode->nextNode;
 	}
-	if (!found)
-	{
-		cout << "Data was not found!\n";
-		return 0;
-	}
+	return 0;
 
 }
 
 //searches for an age
-int applicantStatisticsList::search(int yearsOld)
+int applicantStatisticsList::search(int yearsOld) const
 {
-	AppNode* tempNode = head;
-	AppNode* deleteNode = nullptr;
-	bool found = false;
+	AppNode* tempNode = head;			//initialize tempnode to head
 
-
-	while (tempNode != nullptr)
+	//travers the list
+	while (tempNode != nullptr)			//while not nullptr
 	{
-		if (tempNode->age == yearsOld)
+		if (tempNode->age == yearsOld)	//if parameter is found in list
 		{
-			found = true;
-			return tempNode->count;
-			break;
+			return tempNode->count;		//return count
 		}
 		tempNode = tempNode->nextNode;
 	}
-	if (!found)
-	{
-		cout << "Data was not found!\n";
-		return 0;
-	}
-
+	return 0;
 }
 
 //deletes allergen
 void applicantStatisticsList::deleteNode(string allergen)
 {
-	AppNode* tempNode = head;
-	AppNode* deleteNode = nullptr;
+	AppNode* tempNode = head;			//initalize tempNode to head
+	AppNode* deleteNode = nullptr;		//initalize deleteNode to nullptr
 
-
+	//traverse the list
 	if (tempNode != nullptr)
 	{
-		if (tempNode->allergy == allergen)
+		if (tempNode->allergy == allergen)		//if paramter is found
 		{
-			head = tempNode->nextNode;
-			delete tempNode;
+			head = tempNode->nextNode;			//head is next node in list
+			delete tempNode;					//delete current node
 			tempNode = nullptr;
 		}
+		//travers the list
 		while (tempNode != nullptr)
 		{
 			if (tempNode->nextNode->allergy == allergen)
@@ -185,14 +169,14 @@ void applicantStatisticsList::deleteNode(string allergen)
 //delets age
 void applicantStatisticsList::deleteNode(int yearsOld)
 {
-	AppNode* tempNode = head;
-	AppNode* deleteNode = nullptr;
+	AppNode* tempNode = head;				//initalize tempNode to head
+	AppNode* deleteNode = nullptr;			//initalize deleteNode to nullptr
 
 	if (tempNode != nullptr)
 	{
-		if (tempNode->age == yearsOld)
+		if (tempNode->age == yearsOld)			//if paramter is found
 		{
-			head = tempNode->nextNode;
+			head = tempNode->nextNode;			//head is next node in list
 			delete tempNode;
 			tempNode = nullptr;
 		}
@@ -212,4 +196,38 @@ void applicantStatisticsList::deleteNode(int yearsOld)
 	}
 	delete deleteNode;
 }
+
+//Determins which external file to send data to, depending on 
+//age or allergy type
+void applicantStatisticsList::outputList(bool ageAllergyOpt)
+{
+	fstream dataOut;			//out put data
+	AppNode* temp = head;		//intialize temp to head
+
+	if (ageAllergyOpt)		//if true, go to int
+	{
+		dataOut.open("ageData.txt", fstream::app);
+
+		while (temp != nullptr)
+		{
+			dataOut << temp->age << "\t" << temp->count << endl;
+
+			temp = temp->nextNode;
+		}
+		dataOut.close();
+	}
+	else
+	{	//if fasle to sto string
+		dataOut.open("allergyHash.txt", fstream::app);
+
+		while (temp != nullptr)
+		{
+			dataOut << temp->allergy << "\t" << temp->count << endl;
+
+			temp = temp->nextNode;
+		}
+		dataOut.close();
+	}
+}
+
 

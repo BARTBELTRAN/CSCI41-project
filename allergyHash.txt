@@ -1,0 +1,14 @@
+dairy	2
+
+	
+seasame	2
+soy	5
+dairy	1
+
+	
+seasame	1
+soy	3
+dairy	1
+
+	
+seasame	1

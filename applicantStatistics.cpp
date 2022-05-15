@@ -9,14 +9,14 @@
 //hashes a key value
 int applicantStatistics::Hash(string key)
 {
-	int val = 54;
+	unsigned val = 54;
 	
 	for (char element: key)
 	{
 		val *= 37487;
 		val += element * 2749;
 	}
-	return val % 8;		//0 - 8 buckets
+	return val % 7;		//0 - 6 buckets
 }
 
 //searches for a allergy type
@@ -49,7 +49,7 @@ void applicantStatistics::addHash(int age)
 {	
 	int bucket = Hash(to_string(age));
 
-	hashTable[bucket].add(to_string(age));
+	hashTable[bucket].add(age);
 	
 }
 
@@ -83,7 +83,7 @@ void applicantStatistics::readFile(bool ageAllergyOpt)
 	if (ageAllergyOpt)		//checks for integer
 	{
 		//only uses int as addHash parameter
-		while (getline(dataIn, input, '\n'))
+		while (getline(dataIn, input, '\t'))
 		{
 			dataIn >> integer;
 			addHash(integer);
@@ -94,11 +94,22 @@ void applicantStatistics::readFile(bool ageAllergyOpt)
 	else
 	{
 		//only uses string as addhash parameter
-		while (getline(dataIn, input, '\n'))
+		while (getline(dataIn, input, '\t'))
 		{
 			dataIn >> integer >> input;
 			addHash(input);
 			dataIn >> input >> input;
 		}
+	}
+}
+
+void applicantStatistics::outputFile(bool ageAllergyOpt)
+{
+	fstream dataOut;
+
+	//only uses int as addHash parameter
+	for (size_t i = 0; i < 7; i++)
+	{
+		hashTable[i].outputList(ageAllergyOpt);
 	}
 }

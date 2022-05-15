@@ -11,11 +11,12 @@
 class applicantStatistics
 {
 private:
-	applicantStatisticsList hashTable[7]; //0-7
+	applicantStatisticsList hashTable[7]; //0-6
 	ifstream dataIn;
 	ofstream dataOut;
 
 public:
+	//hash functions
 	int Hash(string);
 	int searchHash(string);
 	int searchHash(int);
@@ -24,5 +25,6 @@ public:
 	void deleteHash(string);
 	void deleteHash(int);
 	void readFile(bool);
+	void outputFile(bool);
 
 };
