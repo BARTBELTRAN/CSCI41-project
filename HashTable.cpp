@@ -16,6 +16,12 @@ hashTable::hashTable(){
 //Function turns key into hashKey then finds the key and places it
 //in the correct position. If spot is taken, will move down one
 //position until next available one is found
+//In this project, I handle collisions through the use of 
+//Linear probing. I acheive this by adding 1 to the hashKey, then
+//moduloing it by the size
+//Load factor in this hash table will be 1 due to
+//The entire table being filled with values so 
+//8/8 which is 1
 void hashTable::insert(string key, string value){
 
 	int hashKey = keyCode(key);
@@ -89,14 +95,19 @@ string hashTable::get(string key){
 	}
 }
 
+//Outputs all changes to hash table to external file.
 void hashTable::fileOutput(){
+	fileOut.open("countryAllergy.txt");
 	for (int i = 0; i < size; i++) {
 		if (names[i] != NULL) {
 			fileOut << names[i]->getKey() << "\t" << names[i]->getValue() << endl;
 		}
 	}
+	fileOut.close();
 }
 
+//Used to fix output by adding commas to larger numbers to make
+//them easier to read
 string hashTable::addComma(string number){
 	int counter = number.length() - 3;
 
@@ -106,6 +117,7 @@ string hashTable::addComma(string number){
 	return number;
 }
 
+//Used to output all country names so user can access their data
 void hashTable::viewCountry(){
 	for (int i = 0; i < size; i++) {
 		if (names[i] != NULL) {
