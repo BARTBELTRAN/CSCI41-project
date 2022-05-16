@@ -1,15 +1,5 @@
 # CSCI41-project
-
-1.) Affected files include CountryManip.cpp, CountryManip.h, SeasonAllergy.h, and SeasonalAllergies.cpp. We had implemented a 
-merge sorting algorithm in CountryManip.cpp and SeasonalAllergies.cpp. A binary search function can be found in CountryManip.cpp
-In order to find the complexity of the sorting function, we have created a variable before and after. Before is intialized
-at the beginning of the function and after is initialized after the merging is finished. IN order to get the complexity, we
-Subtracted before from after to get the total time elapsed during the sort. This can be found during the call to the sorting
-function in our Menu.h header file. It can be found in Case 4 of the menuCountry function and Case 4 of the pollenMenu function
-
-2.) In order to address some feedback, we had changed the class name of DynamicArray to CountryArray in the CountryManip.h 
-header file. This change makes it more clear as to the contents of the dynamicArray. In the future, we plan to condense the
-merge sort functions so instead of having 4 functions, we hope to have 3 or even 2 functions
-
-CountryManip.cpp lines 271 - 414
-SeasonalAllergies.cpp lines 151 - 273
+1.) The very first data structure we used was the dynamic array. We decided to keep this structure because it was suffice for the amount of coding we had, and did not require a more complex data structure. In terms of search complexity for the dynamically allocated array, it would be O(logn) for binary search. In terms of sorting complexity, we decided to do binary search which has a big o notation of O(nlogn). The complexity of traversing through an array is O(n).
+The next data structure we decided to keep was the linked list. The main reasoning for choosing this is due to its very fast search complexity of O(1) for the best case. The linked list requires less memory than an array. It also has an insert and delete option. 
+The next data structure we decided to keep is the Queue. We picked queue because we want to check the applicants on a first in first out basis. This is the opposite of a stack which is a last in first out. Queue has a search complexity of O(n). 
+The last data structure we used was the hash table implemented with a linked list to handle collisions. The linked list keeps the size of the hash table at 8 due to it storing excess data in it as opposed to the hash table. We decided to keep it because it returns specific instances of data implemented with a complexity of O(1) best case and O(n) worst case. 
