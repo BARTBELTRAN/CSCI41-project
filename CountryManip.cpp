@@ -28,20 +28,12 @@ int CountryArray::sizeOfCountry()
 //*********************************************************
 void CountryArray::readFile()
 {
-	//string outPut;
 	string hold;			//Used as a place holder
 	string countryData;
 	int numData;			//Country population
-	int milkData,
-		  peanutData,
-		  treeNutData,
-		  fishData,
-		  eggData,
-		  wheatData,
-		  soyData,
-		  sesameData,
-		  shellFishData;
-
+	int milkData, peanutData, treeNutData, fishData, eggData, 
+	wheatData, soyData, sesameData, shellFishData;
+		  
 	dataIn.open("allergyData.txt");
 
 	for (size_t i = 0; i < countrySize; i++)
@@ -200,13 +192,14 @@ void CountryArray::deleteCountry(string erase)
 //print function outputs all of the country and allergy information
 // to the user when called upon in the user menu.
 //*****************************************************************
+
 void CountryArray::Print() const
 {
 	char pressToContinue;
 	for (int i = 0; i < countrySize; ++i)
 	{
-		cout << left << setw(25) << "Country" << "Population" << endl;
-		cout << left << setw(25) << Array[i].getName() << Array[i].getPop() << endl << endl;
+		cout << left << setfill('\0') << setw(25) << "Country " << "Population" << endl;
+		cout << left << setw(25) << Array[i].getName() <<": " << Array[i].getPop() << endl << endl;
 		cout << left << setw(25) << "Milk allergies: " << Array[i].getMilk() << endl;
 		cout << left << setw(25) << "Peanut allergies: " << Array[i].getPeanut() << endl;
 		cout << left << setw(25) << "Tree Nut allergies: " << Array[i].getTreeNut() << endl;
@@ -261,8 +254,8 @@ int CountryArray::searchArray(string search){
 		}
 	}
 		return -1;
-
 }
+
 
 //*****************************************************************
 //This function merges all elements in the array in ascending 
@@ -271,7 +264,6 @@ int CountryArray::searchArray(string search){
 void CountryArray::mergeAscending(int const left, int const mid, int const right) {
 	int const subArrayOne = mid - left + 1;
 	int const subArrayTwo = right - mid;
-	
 
 	Country* leftArray = new Country[subArrayOne];
 	Country* rightArray = new Country[subArrayTwo];
@@ -326,15 +318,14 @@ void CountryArray::mergeSortAscending(int const begin, int const end) {
 	mergeAscending(begin, mid, end);
 
 }
+
 //*****************************************************************
 //This function merges all elements in the array in Descending 
 // order
 //*****************************************************************
-
 void CountryArray::mergeDescending(int const left, int const mid, int const right) {
 	int const subArrayOne = mid - left + 1;
 	int const subArrayTwo = right - mid;
-
 
 	Country* leftArray = new Country[subArrayOne];
 	Country* rightArray = new Country[subArrayTwo];
@@ -373,8 +364,6 @@ void CountryArray::mergeDescending(int const left, int const mid, int const righ
 		indexOfSubArrayTwo++;
 		indexOfMergedArray++;
 	}
-
-
 }
 
 //*****************************************************************
@@ -391,6 +380,7 @@ void CountryArray::mergeSortDescending(int const begin, int const end) {
 	mergeSortDescending(mid + 1, end);
 	mergeDescending(begin, mid, end);
 }
+
 //*****************************************************************
 //BinarySearch utilizes recursion and splitting up the array multiple
 // times. After this, it will search for a singular element of the 

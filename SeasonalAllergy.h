@@ -38,19 +38,21 @@ public:
 
 	void fileOutput();
 
-	void mergeAscending(int const, int const, int const);	//Merges all split up elements in ascending order
+	void mergeAscending(int const, int const, int const);
 
-	void mergeSortAscending(int const,int const);	//Splits up all elements in array then calls mergeAscending to bring it all back together
+	void mergeSortAscending(int const, int const);
 
-	void mergeDescending(int const, int const, int const);	//Merges all split up elements in descending order
+	void mergeDescending(int const, int const, int const);
 
-	void mergeSortDescending(int const, int const);	//Splits up all elements in array then calls MergeDescending to bring it all back together
+	void mergeSortDescending(int const, int const);
+
+	void pollenPercent();
 
 	int getPollenSize()
 	{
 		return pollenSize;
 	}
-
+	
 	PollenArray() {
 		pollenSize = countPollen();
 		ptrPollen = new Pollen[pollenSize];

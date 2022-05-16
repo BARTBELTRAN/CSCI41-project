@@ -5,8 +5,6 @@
 using namespace std;
 
 
-
-
 //*********************************************************
 //Class definition of country setting country and allergy 
 //names and setting default values for country and allergies
@@ -16,7 +14,6 @@ class Country
 {
 private:
 protected:
-	//int population;
 	string name;
 	string allergyType;
 	int population;
@@ -35,21 +32,22 @@ public:
 	Country()
 	{
 		string allergyType = " ";
-		int milk = 0;
-		int peanut = 0;
-		int treeNut = 0;
-		int fish = 0;
-		int egg = 0;
-		int wheat = 0;
-		int soy = 0;
-		int seasame = 0;
-		int shellfish = 0;
+		milk = 0;
+		peanut = 0;
+		treeNut = 0;
+		fish = 0;
+		egg = 0;
+		wheat = 0;
+		soy = 0;
+		seasame = 0;
+		shellfish = 0;
 
 	}
 
 	//Mutators
+	
 
-	void setPop(int countryPop) { population = countryPop; }
+	void setPop(int countryPop) { population = countryPop;}
 
 	void setName(string countryName) { name = countryName; }
 
@@ -98,4 +96,5 @@ public:
 	int getShellfish() { return shellfish; }
 
 	int getPop() { return population; }
+
 };
